@@ -16,4 +16,4 @@
 - **Line endings:** LF for all text files (`* text=auto eol=lf` in `.gitattributes`)
 - **Encoding:** UTF-8
 - **Binary assets** (`.jpg`, `.png`, `.mp3`, `.wav`, `.so`, `.dll`, `.dylib`) are tracked via Git LFS — do not commit them without LFS configured.
-- GDScript files go in scene-adjacent directories or a dedicated `scripts/` folder (to be established as the project grows).
+- GDScript files live in `scripts/`.
