@@ -46,7 +46,11 @@ func _physics_process(_delta: float) -> void:
 		Input.get_axis("ui_left", "ui_right"),
 		Input.get_axis("ui_up", "ui_down")
 	)
-	velocity = dir.normalized() * speed if dir != Vector2.ZERO else Vector2.ZERO
+	if dir != Vector2.ZERO:
+		velocity = dir.normalized() * speed
+	else:
+		velocity = Vector2.ZERO
+
 	move_and_slide()
 	_clamp_to_grid()
 
