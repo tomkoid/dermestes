@@ -3,10 +3,10 @@ extends CharacterBody2D
 ## Path to the Grid node (sibling by default).
 @export var grid_path: NodePath = NodePath("../Grid")
 
-@export var speed: float = 150.0
+@export var speed: float = 200.0
 @export var max_health: float = 100.0
 ## HP lost per second (starvation).
-@export var health_drain_rate: float = 5.0
+@export var health_drain_rate: float = 2.0
 ## HP gained per second while actively eating.
 @export var heal_rate: float = 20.0
 ## Fraction of body content consumed per second while eating.
@@ -23,6 +23,7 @@ var _nearby_grave: Vector2i = Vector2i(-1, -1)
 @onready var _body_visual: Polygon2D = $Body
 @onready var _feed_indicator: Polygon2D = $FeedIndicator
 @onready var _health_label: Label = $HealthLabel
+@onready var _ass: AnimatedSprite2D = $AnimatedSprite2D
 
 signal health_changed(value: float, maximum: float)
 signal died
@@ -38,7 +39,7 @@ func _process(delta: float) -> void:
 	_nearby_grave = _nearest_grave_in_range()
 	_tick_feeding(delta)
 	_tick_health(delta)
-	_update_visuals()
+	#_update_visuals()
 
 
 func _physics_process(_delta: float) -> void:
@@ -47,8 +48,10 @@ func _physics_process(_delta: float) -> void:
 		Input.get_axis("ui_up", "ui_down")
 	)
 	if dir != Vector2.ZERO:
+		_ass.play("running")
 		velocity = dir.normalized() * speed
 	else:
+		_ass.play("idle")
 		velocity = Vector2.ZERO
 
 	move_and_slide()
@@ -104,18 +107,18 @@ func _nearest_grave_in_range() -> Vector2i:
 	return Vector2i(-1, -1)
 
 
-func _update_visuals() -> void:
-	# Body color: green (healthy) → red (starving)
-	var hp_ratio := health / max_health
-	_body_visual.color = Color(0.7, 0.15, 0.1).lerp(Color(0.35, 0.65, 0.25), hp_ratio)
-
-	# Yellow glow while eating
-	_feed_indicator.visible = _is_feeding
-
-	# Label
-	var hint := ""
-	if _is_feeding:
-		hint = " [eating]"
-	elif _nearby_grave != Vector2i(-1, -1):
-		hint = " [Space]"
-	_health_label.text = "HP %d%s" % [roundi(health), hint]
+#func _update_visuals() -> void:
+	## Body color: green (healthy) → red (starving)
+	#var hp_ratio := health / max_health
+	#_body_visual.color = Color(0.7, 0.15, 0.1).lerp(Color(0.35, 0.65, 0.25), hp_ratio)
+#
+	## Yellow glow while eating
+	#_feed_indicator.visible = _is_feeding
+#
+	## Label
+	#var hint := ""
+	#if _is_feeding:
+		#hint = " [eating]"
+	#elif _nearby_grave != Vector2i(-1, -1):
+		#hint = " [Space]"
+	#_health_label.text = "HP %d%s" % [roundi(health), hint]

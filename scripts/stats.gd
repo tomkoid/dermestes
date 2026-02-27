@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-@onready var player_ref = $"../Player"
+@onready var player_ref = $"../Beetle"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
