@@ -8,8 +8,13 @@
 
 [node name="Grid" parent="." unique_id=120165985 instance=ExtResource("2_0wfyh")]
 position = Vector2(576, 320)
+grid_width = 8
+grid_height = 8
+tile_size = 72
+grave_probability = 0.1
 
 [node name="Beetle" parent="." unique_id=299549955 instance=ExtResource("3_jyhfs")]
+scale = Vector2(1.8, 1.8)
 
 [node name="Stats" type="VBoxContainer" parent="." unique_id=478628930]
 offset_left = 898.0
