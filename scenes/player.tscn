@@ -1,26 +1,26 @@
-[gd_scene format=3 uid="uid://cplayer000001"]
+[gd_scene format=3 uid="uid://c50qj8nn1mqm"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://b50310d82uhi3" path="res://scripts/player.gd" id="1_player"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
 radius = 12.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=763585777]
 script = ExtResource("1_player")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1566527793]
 shape = SubResource("CircleShape2D_1")
 
-[node name="Body" type="Polygon2D" parent="."]
-color = Color(0.35, 0.65, 0.25, 1.0)
+[node name="Body" type="Polygon2D" parent="." unique_id=1617052082]
+color = Color(0.35, 0.65, 0.25, 1)
 polygon = PackedVector2Array(-6, -12, 0, -15, 6, -12, 12, -6, 12, 6, 6, 12, 0, 15, -6, 12, -12, 6, -12, -6)
 
-[node name="FeedIndicator" type="Polygon2D" parent="."]
+[node name="FeedIndicator" type="Polygon2D" parent="." unique_id=1677813937]
 visible = false
-color = Color(1.0, 0.9, 0.2, 0.55)
+color = Color(1, 0.9, 0.2, 0.55)
 polygon = PackedVector2Array(-6, -12, 0, -15, 6, -12, 12, -6, 12, 6, 6, 12, 0, 15, -6, 12, -12, 6, -12, -6)
 
-[node name="HealthLabel" type="Label" parent="."]
+[node name="HealthLabel" type="Label" parent="." unique_id=222220600]
 offset_left = -32.0
 offset_top = -38.0
 offset_right = 64.0
