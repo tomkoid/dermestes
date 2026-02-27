@@ -2,9 +2,26 @@
 
 [ext_resource type="PackedScene" uid="uid://cmsdswgvho46d" path="res://scenes/grid.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://c50qj8nn1mqm" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://cb52f1ihywjh4" path="res://scripts/stats.gd" id="3_sugp2"]
 
-[node name="Node2D" type="Node2D" unique_id=1582120655]
+[node name="CanvasLayer" type="CanvasLayer" unique_id=2013759463]
+
+[node name="Grid" parent="." unique_id=120165985 instance=ExtResource("2_0wfyh")]
+position = Vector2(576, 320)
 
 [node name="Player" parent="." unique_id=1344243331 instance=ExtResource("2_player")]
 
-[node name="Grid" parent="." unique_id=120165985 instance=ExtResource("2_0wfyh")]
+[node name="Stats" type="VBoxContainer" parent="." unique_id=478628930]
+offset_left = 898.0
+offset_top = 25.0
+offset_right = 1090.0
+offset_bottom = 63.0
+script = ExtResource("3_sugp2")
+
+[node name="HP" type="RichTextLabel" parent="Stats" unique_id=545091391]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "HP:"
+fit_content = true
+horizontal_alignment = 2
+vertical_alignment = 1
