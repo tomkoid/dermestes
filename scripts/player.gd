@@ -25,6 +25,8 @@ var _nearby_grave: Vector2i = Vector2i(-1, -1)
 @onready var _health_label: Label = $HealthLabel
 @onready var _ass: AnimatedSprite2D = $AnimatedSprite2D
 
+@onready var _cards_state = $"../CardsState"
+
 signal health_changed(value: float, maximum: float)
 signal change_health(value: float)
 signal died
@@ -55,7 +57,6 @@ func _physics_process(delta: float) -> void:
 		var target_angle = dir.angle() + PI/2
 		rotation = lerp_angle(rotation, target_angle, 0.15)
 		
-		
 		if !_is_feeding:
 			velocity = dir.normalized() * speed
 		else:
@@ -78,12 +79,12 @@ func _tick_feeding(delta: float) -> void:
 		return
 	if _nearby_grave == Vector2i(-1, -1):
 		return
-	var drained := _grid.eat_body(_nearby_grave, body_drain_rate * delta)
+	var drained := _grid.eat_body(_nearby_grave, body_drain_rate * delta, name)
 	if drained > 0.0:
 		_is_feeding = true
 		health = minf(health + heal_rate * delta, max_health)
 		if not _grid.has_body(_nearby_grave):
-			body_consumed.emit(_nearby_grave)
+			body_consumed.emit(_nearby_grave, "Beetle")
 
 
 func _tick_health(delta: float) -> void:
@@ -117,7 +118,11 @@ func _nearest_grave_in_range() -> Vector2i:
 					return c
 	return Vector2i(-1, -1)
 
+var shielded: bool = false
+
 func _handle_change_health(value: float):
+	if value < 0 and shielded:
+		return
 	health = health + value
 
 #func _update_visuals() -> void:

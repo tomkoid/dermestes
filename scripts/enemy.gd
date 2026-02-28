@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		_feeding_timer -= delta
 		if _target_cell != Vector2i(-1, -1):
-			grid.eat_body(_target_cell, delta / FEED_DURATION)
+			grid.eat_body(_target_cell, delta / FEED_DURATION, name)
 		if _feeding_timer <= 0.0:
 			_target_cell = Vector2i(-1, -1)
 		return

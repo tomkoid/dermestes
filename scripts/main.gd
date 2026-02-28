@@ -21,9 +21,10 @@ func _ready() -> void:
 	add_child(enemy_spawn_timer)
 	
 	enemy_spawn_timer.timeout.connect(_spawn_enemy)
+	$CardsState.card_used.connect(_on_card_used)
 
 
-func _on_body_consumed(_cell: Vector2i) -> void:
+func _on_body_consumed(_cell: Vector2i, _consumer_name: String) -> void:
 	_grid.spawn_random_grave()
 
 func _spawn_enemy():
@@ -48,3 +49,21 @@ func _on_player_died():
 
 func _on_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+
+
+# constants for powerups/cards
+const HORNET_RANGE = 200.0
+const DR_HOUSE_HEAL = 30.0
+const JINDRA_SHIELD_DURATION = 5.0
+
+func _on_card_used(card_name: String) -> void:
+	if card_name == "Hornet":
+		var player_pos = player_ref.global_position
+		for enemy_node in $Enemies.get_children():
+			if enemy_node is CharacterBody2D and player_pos.distance_to(enemy_node.global_position) <= HORNET_RANGE:
+				enemy_node.queue_free()
+	elif card_name == "Dr. House":
+		player_ref.change_health.emit(DR_HOUSE_HEAL)
+	elif card_name == "Jindřich ze Skalice":
+		player_ref.shielded = true
+		get_tree().create_timer(JINDRA_SHIELD_DURATION).timeout.connect(func(): player_ref.shielded = false)
