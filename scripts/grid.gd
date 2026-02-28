@@ -267,7 +267,12 @@ func _update_grave_sprite(cell: Vector2i) -> void:
 	var sprite: AnimatedSprite2D = _grave_sprites.get(cell)
 	if sprite:
 		var content: float = _graves.get(cell, 0.0)
-		sprite.frame = mini(int((1.0 - content) * 8), 8)
+		if content <= 0.0:
+			_grave_sprites.erase(cell)
+			sprite.play(&"fadeout")
+			sprite.animation_finished.connect(sprite.get_parent().queue_free, CONNECT_ONE_SHOT)
+		else:
+			sprite.frame = mini(int((1.0 - content) * 8), 8)
 
 
 func _remove_grave_sprite(cell: Vector2i) -> void:
