@@ -81,7 +81,8 @@ func update_cards(_index: int):
 
 		$CardsView.add_child(card_panel)
 
-func _on_card_used(_card_name: String):
+func _on_card_used(card_name: String):
+	create_toast("You used the [b][color=green]%s[/color][/b] card!" % card_name)
 	update_cards(-1)
 
 func update_time_elapsed():
@@ -89,6 +90,35 @@ func update_time_elapsed():
 
 func update_died():
 	stopwatch_stopped = true
+	
+func create_toast(content: String):
+	var label = RichTextLabel.new()
+	label.text = content
+	label.fit_content = true
+	label.bbcode_enabled = true
+	label.position = Vector2(200, 500)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.size = Vector2(400,400)
+	label.scale = Vector2(2.0,2.0)
+	label.modulate.a = 0.0
+	
+	label.scroll_active = false
+		
+	var tween = get_tree().create_tween()
+	
+	# fade in
+	tween.tween_property(label, "modulate:a", 1.0, 0.3)
+
+	# Create a parallel sub-tween
+	var parallel = tween.parallel()
+	parallel.tween_property(label, "position:y", label.position.y - 40, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		
+	parallel.tween_property(label, "modulate:a", 0.0, 1.5)
+	
+	tween.tween_callback(label.queue_free)
+	
+	$"../../../UI".add_child.call_deferred(label)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:

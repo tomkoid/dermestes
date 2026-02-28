@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cmsdswgvho46d" path="res://scenes/grid.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://5m4mqxofbxq" path="res://scenes/beetle.tscn" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://cb52f1ihywjh4" path="res://scripts/stats.gd" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://bm5j82yph3e16" path="res://scenes/cards.gd" id="4_tefeu"]
+[ext_resource type="Script" uid="uid://bm5j82yph3e16" path="res://scripts/cards.gd" id="4_tefeu"]
 [ext_resource type="Texture2D" uid="uid://djx4b1fos71hf" path="res://icon.svg" id="5_tbgi4"]
 [ext_resource type="FontFile" uid="uid://bncmcyq6rk4jc" path="res://UnifrakturCook-Bold.ttf" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://4b3d2biv1xmu" path="res://assets/ui/button1.png" id="7_85g3d"]
@@ -22,13 +22,13 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o6xl0"]
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ya4ey"]
 texture = ExtResource("7_85g3d")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eb6dy"]
 texture = ExtResource("8_choun")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o6xl0"]
 
 [node name="Level" type="Node2D" unique_id=630687970]
 script = ExtResource("1_jyhfs")
@@ -128,5 +128,9 @@ z_index = -56
 position = Vector2(576.00006, 324.00003)
 scale = Vector2(4.8, 4.8)
 texture = ExtResource("10_choun")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=736979228]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="pressed" from="UI/MenuButton" to="." method="_on_menu_button_pressed"]

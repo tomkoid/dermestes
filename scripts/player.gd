@@ -84,7 +84,7 @@ func _tick_feeding(delta: float) -> void:
 		_is_feeding = true
 		health = minf(health + heal_rate * delta, max_health)
 		if not _grid.has_body(_nearby_grave):
-			body_consumed.emit(_nearby_grave)
+			body_consumed.emit(_nearby_grave, "Beetle")
 
 
 func _tick_health(delta: float) -> void:
