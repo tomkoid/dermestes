@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://cmsdswgvho46d"]
 
 [ext_resource type="Script" uid="uid://oa6hu8b5atj2" path="res://scripts/grid.gd" id="1_t5fjg"]
+[ext_resource type="PackedScene" uid="uid://cun54gci4afe1" path="res://scenes/grave.tscn" id="2_w88cy"]
 
 [node name="Grid" type="Node2D" unique_id=120165985]
 z_index = -5
 script = ExtResource("1_t5fjg")
+grave_scene = ExtResource("2_w88cy")

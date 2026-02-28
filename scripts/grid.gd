@@ -44,6 +44,7 @@ class_name Grid
 		centered = v
 		if is_inside_tree():
 			_build()
+@export var grave_scene: PackedScene 
 
 const _SOURCE_ID := 0
 const _TILE_EMPTY := Vector2i(0, 0)
@@ -127,8 +128,13 @@ func _fill_grid() -> void:
 		for y in range(grid_height):
 			var cell := Vector2i(x, y)
 			if rng.randf() < grave_probability:
-				_layer.set_cell(cell, _SOURCE_ID, _TILE_GRAVE)
+				_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
 				_graves[cell] = 1.0
+				if grave_scene:
+					var g := grave_scene.instantiate()
+					g.position = _layer.map_to_local(cell)
+					g.scale = Vector2.ONE * (float(tile_size) / 32.0)
+					_layer.add_child(g)
 			else:
 				_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
 
