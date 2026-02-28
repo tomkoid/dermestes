@@ -237,9 +237,10 @@ func eat_body(cell: Vector2i, amount: float) -> float:
 	if _graves[cell] <= 0.0:
 		_graves.erase(cell)
 		_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
+		_remove_grave_sprite(cell)
 		grave_consumed.emit(cell)
-	_update_grave_sprite(cell)
-
+	else:
+		_update_grave_sprite(cell)
 	return drained
 
 
@@ -285,8 +286,9 @@ func _update_grave_sprite(cell: Vector2i) -> void:
 func _remove_grave_sprite(cell: Vector2i) -> void:
 	var sprite: AnimatedSprite2D = _grave_sprites.get(cell)
 	if sprite:
-		sprite.get_parent().queue_free()
 		_grave_sprites.erase(cell)
+		sprite.play(&"fadeout")
+		sprite.animation_finished.connect(sprite.get_parent().queue_free, CONNECT_ONE_SHOT)
 
 
 ## World-space Rect2 covering the entire grid (top-left origin, pixel size).
