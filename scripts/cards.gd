@@ -1,30 +1,10 @@
 extends Node2D
 
-enum CardType {
-	ATTACK,
-	DEFENSE,
-	INTELLECT
-}
 
-var CARDS = [
-	{
-		"name": "Hornet",
-		"type": CardType.ATTACK,
-		"description": "SHAW! EDIREEE! HENGALEEE!",
-		"card_image_path": "res://assets/karty/hornet.png"
-	},
-	{
-		"name": "Dr. House",
-		"type": CardType.INTELLECT,
-		"description": "Není to Lupus!!",
-		"card_image_path": "res://assets/karty/house.png"
-	},
-	{
-		"name": "Jindřich ze Skalice",
-		"type": CardType.DEFENSE,
-		"description": "I feel quite hungry.",
-		"card_image_path": "res://assets/karty/jindra.png"
-	},
+var CARDS: Array[Card] = [
+	Card.init("Hornet", "SHAW! EDIREEE! HENGALEEE!", CardType.ATTACK, "res://assets/karty/hornet.png"),
+	Card.init("Dr. House", "Není to Lupus!!", CardType.INTELLECT, "res://assets/karty/house.png"),
+	Card.init("Jindřich ze Skalice", "I feel quite hungry.", CardType.DEFENSE, "res://assets/karty/jindra.png"),
 ]
 
 var cards_applied = []
