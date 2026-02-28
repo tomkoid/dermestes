@@ -13,8 +13,8 @@ size = Vector2(130, 131)
 bg_color = Color(0.15487596, 0.154876, 0.15487587, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="Level" type="Node2D" unique_id=630687970]
 script = ExtResource("1_jyhfs")
