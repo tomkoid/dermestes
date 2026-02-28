@@ -86,7 +86,8 @@ func _tick_feeding(delta: float) -> void:
 
 
 func _tick_health(delta: float) -> void:
-	health = clampf(health - health_drain_rate * delta, 0.0, max_health)
+	if velocity != Vector2.ZERO:
+		health = clampf(health - health_drain_rate * delta, 0.0, max_health)
 	health_changed.emit(health, max_health)
 	if health <= 0.0:
 		set_process(false)
