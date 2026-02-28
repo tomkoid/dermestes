@@ -4,12 +4,14 @@ extends Node2D
 @onready var player_ref: CharacterBody2D = $Beetle
 @onready var _grid: Grid = $Grid
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_grid.grave_consumed.connect(_on_body_consumed)
 
 	player_ref.body_consumed.connect(_on_body_consumed)
-
+	
+	player_ref.died.connect(_on_player_died)
 	#var enemy_spawn_timer = get_tree().create_timer(2, true, false, true)
 	var enemy_spawn_timer = Timer.new()
 	enemy_spawn_timer.name = "EnemySpawnTimer"
@@ -39,3 +41,10 @@ func _spawn_enemy():
 	]
 	e.global_position = corners[randi() % corners.size()]
 	$Enemies.add_child(e)
+
+func _on_player_died():
+	get_tree().change_scene_to_file("res://scenes/death.tscn")
+
+
+func _on_menu_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")

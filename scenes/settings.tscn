@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4uvyd8q0ys3a"]
 
-[ext_resource type="Script" uid="uid://cli56u5580its" path="res://scenes/settings.gd" id="1_f4mfi"]
+[ext_resource type="Script" uid="uid://cli56u5580its" path="res://scripts/settings.gd" id="1_f4mfi"]
 [ext_resource type="FontFile" uid="uid://bncmcyq6rk4jc" path="res://UnifrakturCook-Bold.ttf" id="2_es4n0"]
 [ext_resource type="Texture2D" uid="uid://4b3d2biv1xmu" path="res://assets/ui/button1.png" id="3_gis3k"]
 [ext_resource type="Texture2D" uid="uid://b1i2kc6qoy0ae" path="res://assets/ui/button2.png" id="4_83j8s"]

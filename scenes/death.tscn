@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://drxfyxa47ftvw"]
+
+[ext_resource type="Script" uid="uid://ceb3no8ur6llh" path="res://scenes/death.gd" id="1_q1r8t"]
+[ext_resource type="FontFile" uid="uid://bncmcyq6rk4jc" path="res://UnifrakturCook-Bold.ttf" id="2_6up1m"]
+[ext_resource type="Texture2D" uid="uid://4b3d2biv1xmu" path="res://assets/ui/button1.png" id="3_w0no0"]
+[ext_resource type="Texture2D" uid="uid://b1i2kc6qoy0ae" path="res://assets/ui/button2.png" id="4_7205l"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2m3wi"]
+texture = ExtResource("3_w0no0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3l7jp"]
+texture = ExtResource("4_7205l")
+
+[node name="Death" type="Control" unique_id=515634316]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q1r8t")
+
+[node name="PlayButton" type="Button" parent="." unique_id=1290511391]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 449.0
+offset_right = 719.94995
+offset_bottom = 550.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_6up1m")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxTexture_2m3wi")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3l7jp")
+theme_override_styles/hover = SubResource("StyleBoxTexture_3l7jp")
+text = "Play again"
+
+[node name="MenuButton" type="Button" parent="." unique_id=116729967]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 256.0
+offset_right = 720.94995
+offset_bottom = 357.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_6up1m")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxTexture_2m3wi")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3l7jp")
+theme_override_styles/hover = SubResource("StyleBoxTexture_3l7jp")
+text = "Go to menu"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

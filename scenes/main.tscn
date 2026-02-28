@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://5m4mqxofbxq" path="res://scenes/beetle.tscn" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://cb52f1ihywjh4" path="res://scripts/stats.gd" id="3_sugp2"]
 [ext_resource type="Texture2D" uid="uid://djx4b1fos71hf" path="res://icon.svg" id="5_tbgi4"]
+[ext_resource type="FontFile" uid="uid://bncmcyq6rk4jc" path="res://UnifrakturCook-Bold.ttf" id="6_tipki"]
+[ext_resource type="Texture2D" uid="uid://4b3d2biv1xmu" path="res://assets/ui/button1.png" id="7_85g3d"]
+[ext_resource type="Texture2D" uid="uid://b1i2kc6qoy0ae" path="res://assets/ui/button2.png" id="8_choun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
 size = Vector2(130, 131)
@@ -15,6 +18,12 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ya4ey"]
+texture = ExtResource("7_85g3d")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eb6dy"]
+texture = ExtResource("8_choun")
 
 [node name="Level" type="Node2D" unique_id=630687970]
 script = ExtResource("1_jyhfs")
@@ -81,3 +90,18 @@ layout_mode = 2
 text = "TIME 120s"
 fit_content = true
 horizontal_alignment = 3
+
+[node name="MenuButton" type="Button" parent="UI" unique_id=1238204633]
+offset_left = 954.4
+offset_top = 8.0
+offset_right = 1146.15
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_tipki")
+theme_override_font_sizes/font_size = 33
+theme_override_styles/normal = SubResource("StyleBoxTexture_ya4ey")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_eb6dy")
+theme_override_styles/hover = SubResource("StyleBoxTexture_eb6dy")
+text = "Go to menu"
+
+[connection signal="pressed" from="UI/MenuButton" to="." method="_on_menu_button_pressed"]
