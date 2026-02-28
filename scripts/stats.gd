@@ -71,6 +71,14 @@ func update_cards(_index: int):
 		desc.add_theme_font_size_override("font_size", 11)
 		desc.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
 		vbox.add_child(desc)
+		
+		var actual_desc = Label.new()
+		actual_desc.text = card.actual_desc
+		actual_desc.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		actual_desc.autowrap_mode = TextServer.AUTOWRAP_WORD
+		actual_desc.add_theme_font_size_override("font_size", 11)
+		actual_desc.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
+		vbox.add_child(actual_desc)
 
 		var card_name = card.name
 		card_panel.gui_input.connect(func(event: InputEvent):

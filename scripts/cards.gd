@@ -3,9 +3,9 @@ extends Node2D
 var card_initializer = Card.new()
 
 var CARDS: Array[Card] = [
-	card_initializer.init("Hornet", "SHAW! EDIREEE! HENGALEEE!", Card.CardType.ATTACK, "res://assets/karty/hornet.png"),
-	card_initializer.init("Dr. House", "Není to Lupus!!", Card.CardType.INTELLECT, "res://assets/karty/house.png"),
-	card_initializer.init("Jindřich ze Skalice", "I feel quite hungry.", Card.CardType.DEFENSE, "res://assets/karty/jindra.png"),
+	card_initializer.init("Hornet", "Kill people in nearby range", "SHAW! EDIREEE! HENGALEEE!", Card.CardType.ATTACK, "res://assets/karty/hornet.png"),
+	card_initializer.init("Dr. House", "+30 HP", "Není to Lupus!!", Card.CardType.INTELLECT, "res://assets/karty/house.png"),
+	card_initializer.init("Jindřich ze Skalice", "Shield", "I feel quite hungry.", Card.CardType.DEFENSE, "res://assets/karty/jindra.png"),
 ]
 
 var cards_applied = []
