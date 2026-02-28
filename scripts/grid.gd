@@ -44,6 +44,7 @@ class_name Grid
 		centered = v
 		if is_inside_tree():
 			_build()
+@export var grave_scene: PackedScene 
 
 const _SOURCE_ID := 0
 const _TILE_EMPTY := Vector2i(0, 0)
@@ -52,6 +53,7 @@ const _TILE_GRAVE := Vector2i(1, 0)
 var _layer: TileMapLayer = null
 ## Vector2i cell -> float  (body content: 1.0 = full, 0.0 = empty)
 var _graves: Dictionary = {}
+var _grave_sprites: Dictionary = {}  # Vector2i -> AnimatedSprite2D
 
 signal grave_consumed(cell: Vector2i)
 
@@ -79,6 +81,7 @@ func _build() -> void:
 	)
 
 	_graves.clear()
+	_grave_sprites.clear()
 	_fill_grid()
 
 
@@ -127,8 +130,18 @@ func _fill_grid() -> void:
 		for y in range(grid_height):
 			var cell := Vector2i(x, y)
 			if rng.randf() < grave_probability:
-				_layer.set_cell(cell, _SOURCE_ID, _TILE_GRAVE)
+				_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
 				_graves[cell] = 1.0
+				if grave_scene:
+					var g := grave_scene.instantiate()
+					g.position = _layer.map_to_local(cell)
+					g.scale = Vector2.ONE * (float(tile_size) / 32.0)
+					_layer.add_child(g)
+					var sprite := g.get_node("AnimatedSprite2D") as AnimatedSprite2D
+					if sprite:
+						sprite.animation = &"states"
+						sprite.frame = 0
+						_grave_sprites[cell] = sprite
 			else:
 				_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
 
@@ -183,6 +196,7 @@ func consume_body(cell: Vector2i) -> bool:
 	if has_body(cell):
 		_graves.erase(cell)
 		_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
+		_remove_grave_sprite(cell)
 		grave_consumed.emit(cell)
 		return true
 	return false
@@ -224,7 +238,10 @@ func eat_body(cell: Vector2i, amount: float) -> float:
 		_graves.erase(cell)
 		_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
 		grave_consumed.emit(cell)
+	_update_grave_sprite(cell)
+
 	return drained
+
 
 
 ## Spawn a new grave on a random empty (non-grave) cell. Returns the cell, or (-1,-1) if full.
@@ -238,9 +255,38 @@ func spawn_random_grave() -> Vector2i:
 	if empty_cells.is_empty():
 		return Vector2i(-1, -1)
 	var cell: Vector2i = empty_cells[randi() % empty_cells.size()]
-	_layer.set_cell(cell, _SOURCE_ID, _TILE_GRAVE)
+	_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
 	_graves[cell] = 1.0
+	if grave_scene:
+		var g := grave_scene.instantiate()
+		g.position = _layer.map_to_local(cell)
+		g.scale = Vector2.ONE * (float(tile_size) / 32.0)
+		_layer.add_child(g)
+		var sprite := g.get_node("AnimatedSprite2D") as AnimatedSprite2D
+		if sprite:
+			sprite.animation = &"states"
+			sprite.frame = 0
+			_grave_sprites[cell] = sprite
 	return cell
+
+
+func _update_grave_sprite(cell: Vector2i) -> void:
+	var sprite: AnimatedSprite2D = _grave_sprites.get(cell)
+	if sprite:
+		var content: float = _graves.get(cell, 0.0)
+		if content <= 0.0:
+			_grave_sprites.erase(cell)
+			sprite.play(&"fadeout")
+			sprite.animation_finished.connect(sprite.get_parent().queue_free, CONNECT_ONE_SHOT)
+		else:
+			sprite.frame = mini(int((1.0 - content) * 8), 8)
+
+
+func _remove_grave_sprite(cell: Vector2i) -> void:
+	var sprite: AnimatedSprite2D = _grave_sprites.get(cell)
+	if sprite:
+		sprite.get_parent().queue_free()
+		_grave_sprites.erase(cell)
 
 
 ## World-space Rect2 covering the entire grid (top-left origin, pixel size).
