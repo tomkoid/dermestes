@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-@onready var player_ref = $"../../Beetle"
+@onready var player_ref = $"../../../Beetle"
 
 var time_elapsed = 0.0
 var stopwatch_stopped = false
@@ -16,8 +16,8 @@ func _process(delta: float) -> void:
 		time_elapsed += delta
 		update_time_elapsed()
 
-func update_hp(value: int, maximum: int):
-	$HP.value = value
+func update_hp(value: float, maximum: int):
+	$HP.value = ceil(value)
 
 func update_time_elapsed():
 	$Time.text = "TIME " + str(time_elapsed).pad_decimals(2) + "s"
