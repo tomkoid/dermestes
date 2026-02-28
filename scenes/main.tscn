@@ -21,13 +21,13 @@ script = ExtResource("1_jyhfs")
 
 [node name="Grid" parent="." unique_id=120165985 instance=ExtResource("2_0wfyh")]
 position = Vector2(670, 320)
-grid_width = 8
-grid_height = 8
-tile_size = 72
+grid_width = 5
+grid_height = 5
+tile_size = 128
 grave_probability = 0.1
 
 [node name="Beetle" parent="." unique_id=299549955 instance=ExtResource("3_jyhfs")]
-scale = Vector2(1.8, 1.8)
+scale = Vector2(2.5, 2.5)
 
 [node name="Enemies" type="Control" parent="." unique_id=1949656264]
 layout_mode = 3

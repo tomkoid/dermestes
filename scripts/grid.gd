@@ -44,7 +44,8 @@ class_name Grid
 		centered = v
 		if is_inside_tree():
 			_build()
-@export var grave_scene: PackedScene 
+@export var grave_scene: PackedScene
+@export var background_texture: Texture2D
 
 const _SOURCE_ID := 0
 const _TILE_EMPTY := Vector2i(0, 0)
@@ -90,10 +91,14 @@ func _make_tileset() -> TileSet:
 	ts.tile_size = Vector2i(tile_size, tile_size)
 
 	var source := TileSetAtlasSource.new()
-	source.texture = _make_atlas()
+	if background_texture:
+		var bg_img := background_texture.get_image()
+		bg_img.resize(tile_size, tile_size, Image.INTERPOLATE_NEAREST)
+		source.texture = ImageTexture.create_from_image(bg_img)
+	else:
+		source.texture = _make_atlas()
 	source.texture_region_size = Vector2i(tile_size, tile_size)
 	source.create_tile(_TILE_EMPTY)
-	source.create_tile(_TILE_GRAVE)
 
 	ts.add_source(source, _SOURCE_ID)
 	return ts
@@ -103,21 +108,6 @@ func _make_atlas() -> ImageTexture:
 	# Atlas layout: [empty/dirt | grave]
 	var img := Image.create(tile_size * 2, tile_size, false, Image.FORMAT_RGBA8)
 
-	# Dirt tile
-	_img_fill(img, 0, 0, tile_size, tile_size, Color(0.55, 0.40, 0.25))
-	_img_border(img, 0, 0, tile_size, tile_size, Color(0.35, 0.22, 0.12))
-
-	# Grave tile
-	_img_fill(img, tile_size, 0, tile_size, tile_size, Color(0.22, 0.20, 0.18))
-	_img_border(img, tile_size, 0, tile_size, tile_size, Color(0.12, 0.10, 0.08))
-	_img_cross(
-		img,
-		tile_size + tile_size / 2,
-		tile_size / 2,
-		tile_size / 5,
-		3,
-		Color(0.65, 0.60, 0.55)
-	)
 
 	return ImageTexture.create_from_image(img)
 
@@ -216,6 +206,7 @@ func cell_center(cell: Vector2i) -> Vector2:
 func get_active_graves() -> Array[Vector2i]:
 	var result: Array[Vector2i] = []
 	for cell: Vector2i in _graves:
+
 		if _graves[cell] > 0.0:
 			result.append(cell)
 	return result
