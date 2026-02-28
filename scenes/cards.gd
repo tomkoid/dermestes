@@ -28,6 +28,7 @@ var CARDS = [
 ]
 
 var cards_applied = []
+const MAX_CARDS = 2
 
 @onready var grid_ref = $"../Grid"
 
@@ -54,4 +55,6 @@ func _handle_grave_consumed(_cell: Vector2, consumer_name: String):
 	card_add.emit(rand_index)
 
 func _handle_card_add(index: int):
+	if cards_applied.size() >= MAX_CARDS:
+		return
 	cards_applied.push_back(CARDS[index])
