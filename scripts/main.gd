@@ -25,4 +25,12 @@ func _on_body_consumed(_cell: Vector2i) -> void:
 func _spawn_enemy():
 	var e = enemy.instantiate()
 	e.sp_frames = load("res://animations/enemy1.tres")
+	var bounds := _grid.get_grid_bounds()
+	var corners := [
+		Vector2i(0, 0),
+		Vector2i(bounds.size.x - 1, 0),
+		Vector2i(0, bounds.size.y - 1),
+		Vector2i(bounds.size.x - 1, bounds.size.y - 1),
+	]
+	e.global_position = _grid.cell_center(corners[randi() % corners.size()])
 	$Enemies.add_child(e)
