@@ -10,10 +10,12 @@ func _ready() -> void:
 	enemy_spawn_timer.name = "EnemySpawnTimer"
 	enemy_spawn_timer.autostart = true
 	enemy_spawn_timer.one_shot = false
+	enemy_spawn_timer.wait_time = 2.0
 	add_child(enemy_spawn_timer)
 	
 	enemy_spawn_timer.timeout.connect(_spawn_enemy)
 
 func _spawn_enemy():
 	var e = enemy.instantiate()
+	e.sp_frames = load("res://animations/enemy1.tres")
 	$Enemies.add_child(e)

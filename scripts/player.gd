@@ -26,11 +26,14 @@ var _nearby_grave: Vector2i = Vector2i(-1, -1)
 @onready var _ass: AnimatedSprite2D = $AnimatedSprite2D
 
 signal health_changed(value: float, maximum: float)
+signal change_health(value: float)
 signal died
 signal body_consumed(cell: Vector2i)
 
 
 func _ready() -> void:
+	change_health.connect(_handle_change_health)
+	
 	health = max_health
 	_grid = get_node(grid_path)
 
@@ -108,6 +111,8 @@ func _nearest_grave_in_range() -> Vector2i:
 					return c
 	return Vector2i(-1, -1)
 
+func _handle_change_health(value: float):
+	health = health + value
 
 #func _update_visuals() -> void:
 	## Body color: green (healthy) → red (starving)
