@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bncmcyq6rk4jc" path="res://UnifrakturCook-Bold.ttf" id="2_6up1m"]
 [ext_resource type="Texture2D" uid="uid://4b3d2biv1xmu" path="res://assets/ui/button1.png" id="3_w0no0"]
 [ext_resource type="Texture2D" uid="uid://b1i2kc6qoy0ae" path="res://assets/ui/button2.png" id="4_7205l"]
+[ext_resource type="Texture2D" uid="uid://xliobrihggkl" path="res://assets/BAK.png" id="5_6up1m"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2m3wi"]
 texture = ExtResource("3_w0no0")
@@ -47,6 +48,12 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_2m3wi")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_3l7jp")
 theme_override_styles/hover = SubResource("StyleBoxTexture_3l7jp")
 text = "Go to menu"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=408400984]
+z_index = -19
+position = Vector2(576, 324)
+scale = Vector2(4.8000007, 4.8000007)
+texture = ExtResource("5_6up1m")
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
