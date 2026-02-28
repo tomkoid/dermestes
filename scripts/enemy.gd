@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 
 const SPEED = 100.0
-const JUMP_VELOCITY = -400.0
 
 @onready var ass = $AnimatedSprite2D
 @onready var player_ref: CharacterBody2D = get_node("../../Beetle")
@@ -15,14 +14,17 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# calc dir to player
-	var dir = (player_ref.global_position - global_position).normalized()
-	#velocity = dir * SPEED
-	
-	look_at(player_ref.global_position)
+	if not is_instance_valid(player_ref):
+		return
 
-	# on collision
-	var collision = move_and_collide(dir)
-	if collision and collision.get_collider().name == "Beetle":
-		player_ref.change_health.emit(-10)
-		queue_free()
+	var dir = (player_ref.global_position - global_position).normalized()
+	look_at(player_ref.global_position)
+	velocity = dir * SPEED
+	move_and_slide()
+
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().name == "Beetle":
+			player_ref.change_health.emit(-10)
+			queue_free()
+			return
