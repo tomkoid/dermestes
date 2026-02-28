@@ -4,8 +4,14 @@ var card_initializer = Card.new()
 
 var CARDS: Array[Card] = [
 	card_initializer.init("Hornet", "Kill people in nearby range", "SHAW! EDIREEE! HENGALEEE!", Card.CardType.ATTACK, "res://assets/karty/hornet.png"),
+	card_initializer.init("Kratos", "Kill people in nearby range", "", Card.CardType.ATTACK, "res://assets/karty/kratos.png"),
+	card_initializer.init("Legolas", "Kill people in nearby range", "", Card.CardType.ATTACK, "res://assets/karty/legolas.png"),
 	card_initializer.init("Dr. House", "+30 HP", "Není to Lupus!!", Card.CardType.INTELLECT, "res://assets/karty/house.png"),
+	card_initializer.init("Nathan Drake", "+30 HP", "", Card.CardType.INTELLECT, "res://assets/karty/nathan.png"),
+	card_initializer.init("Dash", "+30 HP", "", Card.CardType.INTELLECT, "res://assets/karty/dash.png"),
 	card_initializer.init("Jindřich ze Skalice", "Shield", "I feel quite hungry.", Card.CardType.DEFENSE, "res://assets/karty/jindra.png"),
+	card_initializer.init("Cpt. America", "Shield", "Prohra Občanské války s Iron Manem nedopadlo úplně podle jeho představ", Card.CardType.DEFENSE, "res://assets/karty/cptamerica.png"),
+	card_initializer.init("Gandalf", "Shield", "You shall not pass", Card.CardType.DEFENSE, "res://assets/karty/gandalf.png"),
 ]
 
 var cards_applied = []

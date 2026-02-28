@@ -55,13 +55,13 @@ const DR_HOUSE_HEAL = 30.0
 const JINDRA_SHIELD_DURATION = 5.0
 
 func _on_card_used(card_name: String) -> void:
-	if card_name == "Hornet":
+	if card_name == "Hornet" or card_name == "Legolas" or card_name == "Kratos":
 		var player_pos = player_ref.global_position
 		for enemy_node in $Enemies.get_children():
 			if enemy_node is CharacterBody2D and player_pos.distance_to(enemy_node.global_position) <= HORNET_RANGE:
 				enemy_node.queue_free()
-	elif card_name == "Dr. House":
+	elif card_name == "Dr. House" or card_name == "Nathan Drake" or card_name == "Dash":
 		player_ref.change_health.emit(DR_HOUSE_HEAL)
-	elif card_name == "Jindřich ze Skalice":
+	elif card_name == "Jindřich ze Skalice" or card_name == "Cpt. America" or card_name == "Gandalf":
 		player_ref.shielded = true
 		get_tree().create_timer(JINDRA_SHIELD_DURATION).timeout.connect(func(): player_ref.shielded = false)
