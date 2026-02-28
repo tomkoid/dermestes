@@ -59,5 +59,3 @@ shape = SubResource("RectangleShape2D_tefeu")
 
 [node name="Sprite2D" type="Sprite2D" parent="Control/StaticBody2D" unique_id=1823774109]
 texture = ExtResource("5_tbgi4")
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1335771362]
