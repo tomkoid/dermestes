@@ -18,7 +18,7 @@ class_name Grid
 		if is_inside_tree():
 			_build()
 
-@export var tile_size: int = 64:
+@export var tile_size: int = 32:
 	set(v):
 		tile_size = v
 		if is_inside_tree():

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cwn1t3ifngk4f"]
 
-[ext_resource type="Script" uid="uid://6la44de2ssgo" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_md0e3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7p1mj"]
 size = Vector2(20, 34)
@@ -9,7 +9,7 @@ size = Vector2(20, 34)
 script = ExtResource("1_md0e3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1070638726]
-animation = &"running"
+animation = &""
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=842215951]
 position = Vector2(0, 4)

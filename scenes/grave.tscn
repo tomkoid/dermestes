@@ -98,7 +98,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_aaav7")
 }],
-"loop": true,
+"loop": false,
 "name": &"break",
 "speed": 3.0
 }, {
@@ -144,6 +144,6 @@ shape = SubResource("CapsuleShape2D_mlivn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869238699]
 sprite_frames = SubResource("SpriteFrames_5ryve")
-animation = &"fadeout"
-frame = 6
+animation = &"break"
+frame = 8
 frame_progress = 1.0
