@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://b1snhw1o65csc"]
+
+[ext_resource type="Script" uid="uid://bvmo7td3jsrcm" path="res://scenes/menu.gd" id="1_4ytvr"]
+[ext_resource type="Texture2D" uid="uid://dtfhqfr6d3gh" path="res://assets/menu_bg.png" id="1_yqeox"]
+[ext_resource type="Texture2D" uid="uid://4b3d2biv1xmu" path="res://assets/ui/button1.png" id="2_con2f"]
+[ext_resource type="FontFile" uid="uid://bncmcyq6rk4jc" path="res://UnifrakturCook-Bold.ttf" id="2_mhnvy"]
+[ext_resource type="Texture2D" uid="uid://b1i2kc6qoy0ae" path="res://assets/ui/button2.png" id="3_mhnvy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjb58"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(0, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_con2f"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(288, 0, 288, 162)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mhnvy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjb58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_con2f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ytvr"]
+texture = ExtResource("2_con2f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g3eks"]
+texture = ExtResource("3_mhnvy")
+
+[node name="Menu" type="Control" unique_id=1725038276]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4ytvr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2103246001]
+z_index = -7
+position = Vector2(576, 324)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_mhnvy")
+
+[node name="ExitButton" type="Button" parent="." unique_id=1646937529]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 480.0
+offset_right = 382.94998
+offset_bottom = 581.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_mhnvy")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxTexture_4ytvr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_g3eks")
+theme_override_styles/hover = SubResource("StyleBoxTexture_g3eks")
+text = "Exit"
+
+[node name="SettingsButton" type="Button" parent="." unique_id=1053198488]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 324.0
+offset_right = 382.94998
+offset_bottom = 425.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_mhnvy")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxTexture_4ytvr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_g3eks")
+theme_override_styles/hover = SubResource("StyleBoxTexture_g3eks")
+text = "Settings"
+
+[node name="PlayButton" type="Button" parent="." unique_id=540292263]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 161.0
+offset_right = 382.94998
+offset_bottom = 262.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_mhnvy")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxTexture_4ytvr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_g3eks")
+theme_override_styles/hover = SubResource("StyleBoxTexture_g3eks")
+text = "Play"

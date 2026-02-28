@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="dermestes"
-run/main_scene="uid://dgesqi5swrm05"
+run/main_scene="uid://b1snhw1o65csc"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
