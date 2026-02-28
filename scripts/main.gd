@@ -9,8 +9,6 @@ extends Node2D
 func _ready() -> void:
 	_grid.grave_consumed.connect(_on_body_consumed)
 
-	player_ref.body_consumed.connect(_on_body_consumed)
-	
 	player_ref.died.connect(_on_player_died)
 	#var enemy_spawn_timer = get_tree().create_timer(2, true, false, true)
 	var enemy_spawn_timer = Timer.new()

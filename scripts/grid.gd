@@ -290,3 +290,6 @@ func get_world_bounds() -> Rect2:
 		return Rect2()
 	var origin := _layer.to_global(Vector2.ZERO)
 	return Rect2(origin, Vector2(grid_width * tile_size, grid_height * tile_size))
+
+func _process(delta: float) -> void:
+	print(get_active_graves())
