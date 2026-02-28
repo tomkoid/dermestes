@@ -24,6 +24,7 @@ var _nearby_grave: Vector2i = Vector2i(-1, -1)
 @onready var _feed_indicator: Polygon2D = $FeedIndicator
 @onready var _health_label: Label = $HealthLabel
 @onready var _ass: AnimatedSprite2D = $AnimatedSprite2D
+@onready var _collision: CollisionShape2D = $CollisionShape2D
 
 @onready var _cards_state = $"../CardsState"
 
@@ -103,8 +104,9 @@ func _tick_health(delta: float) -> void:
 
 func _clamp_to_grid() -> void:
 	var bounds: Rect2 = _grid.get_world_bounds()
-	global_position.x = clampf(global_position.x, bounds.position.x, bounds.end.x)
-	global_position.y = clampf(global_position.y, bounds.position.y, bounds.end.y)
+	var half := (_collision.shape as RectangleShape2D).size / 2.0 * scale
+	global_position.x = clampf(global_position.x, bounds.position.x + half.x, bounds.end.x - half.x)
+	global_position.y = clampf(global_position.y, bounds.position.y + half.y, bounds.end.y - half.y)
 
 
 ## Returns the nearest grave cell within feed_range, or Vector2i(-1,-1) if none.
