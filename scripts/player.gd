@@ -118,7 +118,11 @@ func _nearest_grave_in_range() -> Vector2i:
 					return c
 	return Vector2i(-1, -1)
 
+var shielded: bool = false
+
 func _handle_change_health(value: float):
+	if value < 0 and shielded:
+		return
 	health = health + value
 
 #func _update_visuals() -> void:
