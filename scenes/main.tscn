@@ -43,7 +43,7 @@ fit_content = true
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="." unique_id=828867173]
+[node name="TestObstacle" type="Control" parent="." unique_id=828867173]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -52,11 +52,11 @@ offset_top = 139.0
 offset_right = 205.0
 offset_bottom = 179.0
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Control" unique_id=988649103]
+[node name="StaticBody2D" type="StaticBody2D" parent="TestObstacle" unique_id=988649103]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/StaticBody2D" unique_id=82667942]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestObstacle/StaticBody2D" unique_id=82667942]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_tefeu")
 
-[node name="Sprite2D" type="Sprite2D" parent="Control/StaticBody2D" unique_id=1823774109]
+[node name="Sprite2D" type="Sprite2D" parent="TestObstacle/StaticBody2D" unique_id=1823774109]
 texture = ExtResource("5_tbgi4")

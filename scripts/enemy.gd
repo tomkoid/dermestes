@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED = 100.0
 
 @onready var player_ref: CharacterBody2D = get_node("../../Beetle")
+@onready var grid: Grid = get_node("../../Grid")
 
 @export var sp_frames: SpriteFrames
 @export var num_rays = 16
@@ -10,6 +11,9 @@ const SPEED = 100.0
 
 var ray_directions: Array[Vector2] = []
 var ass: AnimatedSprite2D
+## true = hunt graves, false = hunt the player
+var hunts_graves: bool = false
+var _target_cell: Vector2i = Vector2i(-1, -1)
 
 
 func _ready() -> void:
@@ -20,6 +24,7 @@ func _ready() -> void:
 	add_child(ass)
 	
 	ass.sprite_frames = sp_frames
+	hunts_graves = randf() < 0.5
 	for i in num_rays:
 		var angle = i * TAU / num_rays
 		ray_directions.append(Vector2.RIGHT.rotated(angle))
@@ -30,14 +35,24 @@ func _physics_process(delta: float) -> void:
 	if not is_instance_valid(player_ref):
 		return
 
-	var desired_dir = (player_ref.global_position - global_position).normalized()
+	var target_pos = _pick_target()
+	if target_pos == null:
+		return
+
+	var desired_dir = (target_pos - global_position).normalized()
 	var chosen_dir = _get_avoidance_direction(desired_dir)
-	
+
 	var target_angle = chosen_dir.angle() + PI/2
 	rotation = lerp_angle(rotation, target_angle, 0.15)
-	
+
 	velocity = chosen_dir * SPEED
 	move_and_slide()
+
+	# Consume grave when close enough
+	if hunts_graves and _target_cell != Vector2i(-1, -1):
+		if global_position.distance_to(grid.cell_center(_target_cell)) < 24.0:
+			grid.consume_body(_target_cell)
+			_target_cell = Vector2i(-1, -1)
 
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
@@ -45,6 +60,27 @@ func _physics_process(delta: float) -> void:
 			player_ref.change_health.emit(-10)
 			queue_free()
 			return
+
+
+## Returns the world position this enemy should move toward.
+func _pick_target() -> Variant:
+	if not hunts_graves:
+		return player_ref.global_position
+
+	var graves: Array[Vector2i] = grid.get_active_graves()
+	if graves.is_empty():
+		return player_ref.global_position
+
+	var best_cell = graves[0]
+	var best_dist := global_position.distance_squared_to(grid.cell_center(best_cell))
+	for cell in graves:
+		var d = global_position.distance_squared_to(grid.cell_center(cell))
+		if d < best_dist:
+			best_dist = d
+			best_cell = cell
+
+	_target_cell = best_cell
+	return grid.cell_center(best_cell)
 
 
 func _get_avoidance_direction(desired_dir: Vector2) -> Vector2:
