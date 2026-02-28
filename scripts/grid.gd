@@ -239,11 +239,7 @@ func eat_body(cell: Vector2i, amount: float) -> float:
 		_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
 		grave_consumed.emit(cell)
 	_update_grave_sprite(cell)
-	if _graves[cell] <= 0.0:
-		_graves.erase(cell)
-		_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
-		_remove_grave_sprite(cell)
-		grave_consumed.emit(cell)
+
 	return drained
 
 
