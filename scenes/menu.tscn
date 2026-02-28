@@ -90,3 +90,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_4ytvr")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_g3eks")
 theme_override_styles/hover = SubResource("StyleBoxTexture_g3eks")
 text = "Play"
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
