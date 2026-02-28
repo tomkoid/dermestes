@@ -54,7 +54,11 @@ func _physics_process(delta: float) -> void:
 		_ass.play("running")
 		var target_angle = dir.angle() + PI/2
 		rotation = lerp_angle(rotation, target_angle, 0.15)
-		velocity = dir.normalized() * speed
+		
+		if !_is_feeding:
+			velocity = dir.normalized() * speed
+		else:
+			velocity = Vector2.ZERO
 	else:
 		_ass.play("idle")
 		velocity = Vector2.ZERO
