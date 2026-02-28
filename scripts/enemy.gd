@@ -14,6 +14,9 @@ var ass: AnimatedSprite2D
 ## true = hunt graves, false = hunt the player
 var hunts_graves: bool = false
 var _target_cell: Vector2i = Vector2i(-1, -1)
+var _feeding_timer: float = 0.0
+
+const FEED_DURATION = 2.0
 
 
 func _ready() -> void:
@@ -35,6 +38,15 @@ func _physics_process(delta: float) -> void:
 	if not is_instance_valid(player_ref):
 		return
 
+	# Pause at grave while feeding
+	if _feeding_timer > 0.0:
+		velocity = Vector2.ZERO
+		_feeding_timer -= delta
+		if _feeding_timer <= 0.0 and _target_cell != Vector2i(-1, -1):
+			grid.consume_body(_target_cell)
+			_target_cell = Vector2i(-1, -1)
+		return
+
 	var target_pos = _pick_target()
 	if target_pos == null:
 		return
@@ -48,11 +60,11 @@ func _physics_process(delta: float) -> void:
 	velocity = chosen_dir * SPEED
 	move_and_slide()
 
-	# Consume grave when close enough
+	# Start feeding when close enough to target grave
 	if hunts_graves and _target_cell != Vector2i(-1, -1):
 		if global_position.distance_to(grid.cell_center(_target_cell)) < 24.0:
-			grid.consume_body(_target_cell)
-			_target_cell = Vector2i(-1, -1)
+			_feeding_timer = FEED_DURATION
+			return
 
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
