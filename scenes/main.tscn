@@ -32,7 +32,7 @@ texture = ExtResource("8_choun")
 script = ExtResource("1_jyhfs")
 
 [node name="Grid" parent="." unique_id=120165985 instance=ExtResource("2_0wfyh")]
-position = Vector2(670, 320)
+position = Vector2(750, 325)
 grid_width = 5
 grid_height = 5
 tile_size = 128
@@ -73,7 +73,7 @@ texture = ExtResource("5_tbgi4")
 [node name="Panel" type="Panel" parent="UI" unique_id=215494794]
 offset_left = 30.0
 offset_top = 39.0
-offset_right = 280.0
+offset_right = 353.0
 offset_bottom = 609.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_tbgi4")
 
@@ -82,7 +82,7 @@ layout_mode = 1
 anchors_preset = -1
 offset_left = 32.0
 offset_top = 32.0
-offset_right = 224.0
+offset_right = 290.0
 offset_bottom = 548.0893
 script = ExtResource("3_sugp2")
 
@@ -95,11 +95,12 @@ text = "TIME 120s"
 fit_content = true
 horizontal_alignment = 3
 
-[node name="CardsView" type="VBoxContainer" parent="UI/Panel/Stats" unique_id=1995849360]
+[node name="CardsView" type="HBoxContainer" parent="UI/Panel/Stats" unique_id=2139926992]
 layout_mode = 2
-size_flags_vertical = 3
+alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="UI/Panel/Stats/CardsView" unique_id=623103483]
+visible = false
 texture = ExtResource("7_o6xl0")
 
 [node name="MenuButton" type="Button" parent="UI" unique_id=1238204633]
