@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Node2D
 
 @onready var enemy = preload("res://scenes/enemy.tscn")
 @onready var player_ref: CharacterBody2D = $Beetle
