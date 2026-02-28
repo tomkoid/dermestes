@@ -27,7 +27,7 @@ func _on_body_consumed(_cell: Vector2i) -> void:
 func _spawn_enemy():
 	var e = enemy.instantiate()
 	
-	var enemy_type_index = randi_range(1,3)
+	var enemy_type_index = randi_range(1,2)
 	e.sp_frames = load("res://animations/enemy%d.tres" % enemy_type_index)
 	var bounds := _grid.get_world_bounds()
 	var offset := float(_grid.tile_size)
