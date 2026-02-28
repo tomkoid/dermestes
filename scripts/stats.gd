@@ -22,9 +22,9 @@ func update_hp(value: float, maximum: int):
 	$HP.value = ceil(value)
 
 func update_cards(_index: int):
-	var cg_children = $CardsGrid.get_children()
+	var cg_children = $CardsView.get_children()
 	for child in cg_children:
-		$CardsGrid.remove_child(child)
+		$CardsView.remove_child(child)
 	
 	for card in cards_state_ref.cards_applied:
 		print(card)
@@ -35,7 +35,7 @@ func update_cards(_index: int):
 		sprite.texture = img_texture
 		sprite.scale = Vector2(2,2)
 		
-		$CardsGrid.add_child(sprite)
+		$CardsView.add_child(sprite)
 
 func update_time_elapsed():
 	$Time.text = "TIME " + str(time_elapsed).pad_decimals(2) + "s"

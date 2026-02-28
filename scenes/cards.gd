@@ -9,9 +9,21 @@ enum CardType {
 var CARDS = [
 	{
 		"name": "Hornet",
-		"type": "attack",
-		"description": "hey",
+		"type": CardType.ATTACK,
+		"description": "SHAW! EDIREEE! HENGALEEE!",
 		"card_image_path": "res://assets/karty/hornet.png"
+	},
+	{
+		"name": "Dr. House",
+		"type": CardType.INTELLECT,
+		"description": "Není to Lupus!!",
+		"card_image_path": "res://assets/karty/house.png"
+	},
+	{
+		"name": "Jindřich ze Skalice",
+		"type": CardType.DEFENSE,
+		"description": "asdfjasdfkjfjasd",
+		"card_image_path": "res://assets/karty/jindra.png"
 	},
 ]
 
