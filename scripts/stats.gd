@@ -56,7 +56,7 @@ func update_cards(_index: int):
 		title.add_theme_font_size_override("font_size", 14)
 		vbox.add_child(title)
 
-		var img_texture = load(card.card_image_path)
+		var img_texture = load(card.image_texture_path)
 		if img_texture:
 			var tex_rect = TextureRect.new()
 			tex_rect.texture = img_texture
@@ -65,7 +65,7 @@ func update_cards(_index: int):
 			vbox.add_child(tex_rect)
 
 		var desc = Label.new()
-		desc.text = card.description
+		desc.text = card.desc
 		desc.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		desc.autowrap_mode = TextServer.AUTOWRAP_WORD
 		desc.add_theme_font_size_override("font_size", 11)
