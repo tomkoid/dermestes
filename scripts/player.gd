@@ -12,7 +12,7 @@ extends CharacterBody2D
 ## Fraction of body content consumed per second while eating.
 @export var body_drain_rate: float = 0.25
 ## World-pixel radius within which the player can eat from a grave.
-@export var feed_range: float = 48.0
+@export var feed_range: float = 80.0
 
 var health: float
 
