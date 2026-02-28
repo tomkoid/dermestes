@@ -34,7 +34,10 @@ func _process(delta: float) -> void:
 func get_cards():
 	return cards_applied
 
-func _handle_grave_consumed(_cell: Vector2):
+func _handle_grave_consumed(_cell: Vector2, consumer_name: String):
+	if consumer_name != "Beetle":
+		return
+	
 	var rand_index = randi_range(0, len(CARDS)-1)
 	card_add.emit(rand_index)
 

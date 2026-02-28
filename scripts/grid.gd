@@ -58,7 +58,7 @@ var _layer: TileMapLayer = null
 var _graves: Dictionary = {}
 var _grave_sprites: Dictionary = {}  # Vector2i -> AnimatedSprite2D
 
-signal grave_consumed(cell: Vector2i)
+signal grave_consumed(cell: Vector2i, consumer_name: String)
 
 
 func _ready() -> void:
@@ -184,12 +184,12 @@ func has_body(cell: Vector2i) -> bool:
 
 
 ## Eat the body at `cell`. Returns true on success, false if already consumed or not a grave.
-func consume_body(cell: Vector2i) -> bool:
+func consume_body(cell: Vector2i, consumer_name: String = "") -> bool:
 	if has_body(cell):
 		_graves.erase(cell)
 		_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
 		_remove_grave_sprite(cell)
-		grave_consumed.emit(cell)
+		grave_consumed.emit(cell, consumer_name)
 		return true
 	return false
 
@@ -221,7 +221,7 @@ func get_grid_bounds() -> Rect2i:
 
 ## Gradually drain body content. Returns the amount actually drained (≤ amount).
 ## Use this for the player's slow eating; consume_body() for instant removal.
-func eat_body(cell: Vector2i, amount: float) -> float:
+func eat_body(cell: Vector2i, amount: float, consumer_name: String = "") -> float:
 	var content: float = _graves.get(cell, 0.0)
 	if content <= 0.0:
 		return 0.0
@@ -231,7 +231,7 @@ func eat_body(cell: Vector2i, amount: float) -> float:
 		_graves.erase(cell)
 		_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
 		_remove_grave_sprite(cell)
-		grave_consumed.emit(cell)
+		grave_consumed.emit(cell, consumer_name)
 	else:
 		_update_grave_sprite(cell)
 	return drained

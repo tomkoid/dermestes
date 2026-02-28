@@ -23,7 +23,7 @@ func _ready() -> void:
 	enemy_spawn_timer.timeout.connect(_spawn_enemy)
 
 
-func _on_body_consumed(_cell: Vector2i) -> void:
+func _on_body_consumed(_cell: Vector2i, _consumer_name: String) -> void:
 	_grid.spawn_random_grave()
 
 func _spawn_enemy():

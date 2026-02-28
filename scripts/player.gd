@@ -79,7 +79,7 @@ func _tick_feeding(delta: float) -> void:
 		return
 	if _nearby_grave == Vector2i(-1, -1):
 		return
-	var drained := _grid.eat_body(_nearby_grave, body_drain_rate * delta)
+	var drained := _grid.eat_body(_nearby_grave, body_drain_rate * delta, name)
 	if drained > 0.0:
 		_is_feeding = true
 		health = minf(health + heal_rate * delta, max_health)
