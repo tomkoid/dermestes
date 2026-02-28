@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1snhw1o65csc"]
 
-[ext_resource type="Script" path="res://scripts/menu.gd" id="1_4ytvr"]
+[ext_resource type="Script" uid="uid://bvmo7td3jsrcm" path="res://scripts/menu.gd" id="1_4ytvr"]
 [ext_resource type="Texture2D" uid="uid://dtfhqfr6d3gh" path="res://assets/menu_bg.png" id="1_yqeox"]
 [ext_resource type="Texture2D" uid="uid://4b3d2biv1xmu" path="res://assets/ui/button1.png" id="2_con2f"]
 [ext_resource type="FontFile" uid="uid://bncmcyq6rk4jc" path="res://UnifrakturCook-Bold.ttf" id="2_mhnvy"]
@@ -95,6 +95,7 @@ text = "Play"
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1086415837]
 stream = ExtResource("6_g3eks")
 autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
