@@ -308,6 +308,13 @@ func spawn_random_grave() -> Vector2i:
 	return cell
 
 
+func _update_grave_sprite(cell: Vector2i) -> void:
+	var sprite: AnimatedSprite2D = _grave_sprites.get(cell)
+	if sprite:
+		var content: float = _graves.get(cell, 0.0)
+		sprite.frame = mini(int((1.0 - content) * 8), 8)
+
+
 ## World-space Rect2 covering the entire grid (top-left origin, pixel size).
 func get_world_bounds() -> Rect2:
 	if not is_instance_valid(_layer):
