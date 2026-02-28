@@ -22,7 +22,7 @@ var CARDS = [
 	{
 		"name": "Jindřich ze Skalice",
 		"type": CardType.DEFENSE,
-		"description": "asdfjasdfkjfjasd",
+		"description": "I feel quite hungry.",
 		"card_image_path": "res://assets/karty/jindra.png"
 	},
 ]
