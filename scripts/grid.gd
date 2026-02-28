@@ -1,6 +1,8 @@
 extends Node2D
 class_name Grid
 
+#@onready var cards_state_ref = $"../CardsState"
+
 ## Adjustable tilemap grid.
 ## Cells are either plain dirt or graves containing a decomposing body.
 ## The grid is purely spatial — the player (wormbeetle) moves freely in world space

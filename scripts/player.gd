@@ -25,6 +25,8 @@ var _nearby_grave: Vector2i = Vector2i(-1, -1)
 @onready var _health_label: Label = $HealthLabel
 @onready var _ass: AnimatedSprite2D = $AnimatedSprite2D
 
+@onready var _cards_state = $"../CardsState"
+
 signal health_changed(value: float, maximum: float)
 signal change_health(value: float)
 signal died
@@ -54,7 +56,6 @@ func _physics_process(delta: float) -> void:
 		_ass.play("running")
 		var target_angle = dir.angle() + PI/2
 		rotation = lerp_angle(rotation, target_angle, 0.15)
-		
 		
 		if !_is_feeding:
 			velocity = dir.normalized() * speed

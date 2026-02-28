@@ -1,0 +1,42 @@
+extends Node2D
+
+enum CardType {
+	ATTACK,
+	DEFENSE,
+	INTELLECT
+}
+
+var CARDS = [
+	{
+		"name": "Hornet",
+		"type": "attack",
+		"description": "hey",
+		"card_image_path": "res://assets/karty/hornet.png"
+	},
+]
+
+var cards_applied = []
+
+@onready var grid_ref = $"../Grid"
+
+signal card_add(index: int)
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	grid_ref.grave_consumed.connect(_handle_grave_consumed)
+	card_add.connect(_handle_card_add)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+	
+func get_cards():
+	return cards_applied
+
+func _handle_grave_consumed(_cell: Vector2):
+	var rand_index = randi_range(0, len(CARDS)-1)
+	card_add.emit(rand_index)
+
+func _handle_card_add(index: int):
+	cards_applied.push_back(CARDS[index])

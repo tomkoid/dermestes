@@ -1,6 +1,7 @@
 extends VBoxContainer
 
 @onready var player_ref = $"../../../Beetle"
+@onready var cards_state_ref = $"../../../CardsState"
 
 var time_elapsed = 0.0
 var stopwatch_stopped = false
@@ -10,6 +11,7 @@ func _ready() -> void:
 	stopwatch_stopped = false
 	player_ref.health_changed.connect(update_hp)
 	player_ref.died.connect(update_died)
+	cards_state_ref.card_add.connect(update_cards)
 
 func _process(delta: float) -> void:
 	if !stopwatch_stopped:
@@ -18,6 +20,15 @@ func _process(delta: float) -> void:
 
 func update_hp(value: float, maximum: int):
 	$HP.value = ceil(value)
+
+func update_cards(_index: int):
+	print("hreer")
+	var cg_children = $CardsGrid.get_children()
+	for child in cg_children:
+		$CardsGrid.remove_child(child)
+	
+	for card in cards_state_ref.cards_applied:
+		print(card)
 
 func update_time_elapsed():
 	$Time.text = "TIME " + str(time_elapsed).pad_decimals(2) + "s"
