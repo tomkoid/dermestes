@@ -53,6 +53,8 @@ var _layer: TileMapLayer = null
 ## Vector2i cell -> float  (body content: 1.0 = full, 0.0 = empty)
 var _graves: Dictionary = {}
 
+signal grave_consumed(cell: Vector2i)
+
 
 func _ready() -> void:
 	_build()
@@ -179,7 +181,9 @@ func has_body(cell: Vector2i) -> bool:
 ## Eat the body at `cell`. Returns true on success, false if already consumed or not a grave.
 func consume_body(cell: Vector2i) -> bool:
 	if has_body(cell):
-		_graves[cell] = 0.0
+		_graves.erase(cell)
+		_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
+		grave_consumed.emit(cell)
 		return true
 	return false
 
@@ -219,6 +223,7 @@ func eat_body(cell: Vector2i, amount: float) -> float:
 	if _graves[cell] <= 0.0:
 		_graves.erase(cell)
 		_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
+		grave_consumed.emit(cell)
 	return drained
 
 
