@@ -28,6 +28,8 @@ texture = ExtResource("7_85g3d")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eb6dy"]
 texture = ExtResource("8_choun")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o6xl0"]
+
 [node name="Level" type="Node2D" unique_id=630687970]
 script = ExtResource("1_jyhfs")
 
@@ -95,7 +97,12 @@ text = "TIME 120s"
 fit_content = true
 horizontal_alignment = 3
 
-[node name="CardsView" type="HBoxContainer" parent="UI/Panel/Stats" unique_id=2139926992]
+[node name="VSeparator" type="VSeparator" parent="UI/Panel/Stats" unique_id=1230351904]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_o6xl0")
+
+[node name="CardsView" type="VBoxContainer" parent="UI/Panel/Stats" unique_id=2056921007]
 layout_mode = 2
 alignment = 1
 
