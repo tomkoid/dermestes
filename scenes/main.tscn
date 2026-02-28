@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cmsdswgvho46d" path="res://scenes/grid.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://5m4mqxofbxq" path="res://scenes/beetle.tscn" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://cb52f1ihywjh4" path="res://scripts/stats.gd" id="3_sugp2"]
-[ext_resource type="Script" path="res://scripts/cards.gd" id="4_tefeu"]
+[ext_resource type="Script" uid="uid://bm5j82yph3e16" path="res://scripts/cards.gd" id="4_tefeu"]
 [ext_resource type="Texture2D" uid="uid://djx4b1fos71hf" path="res://icon.svg" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://ciki5d063b650" path="res://assets/karyholder.png" id="6_eb6dy"]
 [ext_resource type="FontFile" uid="uid://bncmcyq6rk4jc" path="res://UnifrakturCook-Bold.ttf" id="6_tipki"]
@@ -46,6 +46,7 @@ grave_probability = 0.1
 [node name="Beetle" parent="." unique_id=299549955 instance=ExtResource("3_jyhfs")]
 position = Vector2(681.99994, 203.99998)
 scale = Vector2(2.5, 2.5)
+health_drain_rate = 4.0
 
 [node name="Enemies" type="Control" parent="." unique_id=1949656264]
 layout_mode = 3
