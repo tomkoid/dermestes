@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://cf3squ6p22sc1" path="res://scripts/grave.gd" id="1_mlivn"]
 [ext_resource type="SpriteFrames" uid="uid://bbxs76kbv7p3r" path="res://animations/grave.tres" id="2_inmiy"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mlivn"]
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_5ryve"]
 animations = []
 
@@ -12,14 +10,6 @@ animations = []
 script = ExtResource("1_mlivn")
 sprite_frames = ExtResource("2_inmiy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1194391794]
-shape = SubResource("CapsuleShape2D_mlivn")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869238699]
 sprite_frames = SubResource("SpriteFrames_5ryve")
 animation = &""
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1029138770]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1029138771]
-shape = SubResource("CapsuleShape2D_mlivn")

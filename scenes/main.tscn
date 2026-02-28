@@ -41,6 +41,7 @@ tile_size = 128
 grave_probability = 0.1
 
 [node name="Beetle" parent="." unique_id=299549955 instance=ExtResource("3_jyhfs")]
+position = Vector2(681.99994, 203.99998)
 scale = Vector2(2.5, 2.5)
 
 [node name="Enemies" type="Control" parent="." unique_id=1949656264]
