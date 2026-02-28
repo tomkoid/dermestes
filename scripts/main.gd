@@ -6,11 +6,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-<<<<<<< HEAD
 	_grid.grave_consumed.connect(_on_body_consumed)
-=======
-	_grid.grave_consumed.connect(_on_body_consumed)
->>>>>>> 96ccb59 (feat: remove coffins from map if empty)
+
 	player_ref.body_consumed.connect(_on_body_consumed)
 
 	#var enemy_spawn_timer = get_tree().create_timer(2, true, false, true)
