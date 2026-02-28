@@ -234,6 +234,9 @@ func eat_body(cell: Vector2i, amount: float) -> float:
 		return 0.0
 	var drained := minf(content, amount)
 	_graves[cell] = content - drained
+	if _graves[cell] <= 0.0:
+		_graves.erase(cell)
+		_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
 	_update_grave_sprite(cell)
 	if _graves[cell] <= 0.0:
 		_graves.erase(cell)
@@ -271,6 +274,22 @@ func _remove_grave_sprite(cell: Vector2i) -> void:
 	if sprite:
 		sprite.get_parent().queue_free()
 		_grave_sprites.erase(cell)
+
+
+## Spawn a new grave on a random empty (non-grave) cell. Returns the cell, or (-1,-1) if full.
+func spawn_random_grave() -> Vector2i:
+	var empty_cells: Array[Vector2i] = []
+	for x in range(grid_width):
+		for y in range(grid_height):
+			var cell := Vector2i(x, y)
+			if not _graves.has(cell):
+				empty_cells.append(cell)
+	if empty_cells.is_empty():
+		return Vector2i(-1, -1)
+	var cell: Vector2i = empty_cells[randi() % empty_cells.size()]
+	_layer.set_cell(cell, _SOURCE_ID, _TILE_GRAVE)
+	_graves[cell] = 1.0
+	return cell
 
 
 ## World-space Rect2 covering the entire grid (top-left origin, pixel size).
