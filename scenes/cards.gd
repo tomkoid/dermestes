@@ -33,6 +33,7 @@ const MAX_CARDS = 2
 @onready var grid_ref = $"../Grid"
 
 signal card_add(index: int)
+signal card_used(card_name: String)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,6 +54,13 @@ func _handle_grave_consumed(_cell: Vector2, consumer_name: String):
 	
 	var rand_index = randi_range(0, len(CARDS)-1)
 	card_add.emit(rand_index)
+
+func remove_card(card_name: String) -> void:
+	for i in cards_applied.size():
+		if cards_applied[i].name == card_name:
+			cards_applied.remove_at(i)
+			card_used.emit(card_name)
+			return
 
 func _handle_card_add(index: int):
 	if cards_applied.size() >= MAX_CARDS:

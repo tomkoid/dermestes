@@ -12,6 +12,7 @@ func _ready() -> void:
 	player_ref.health_changed.connect(update_hp)
 	player_ref.died.connect(update_died)
 	cards_state_ref.card_add.connect(update_cards)
+	cards_state_ref.card_used.connect(_on_card_used)
 
 func _process(delta: float) -> void:
 	if !stopwatch_stopped:
@@ -71,7 +72,17 @@ func update_cards(_index: int):
 		desc.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
 		vbox.add_child(desc)
 
+		var card_name = card.name
+		card_panel.gui_input.connect(func(event: InputEvent):
+			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+				cards_state_ref.remove_card(card_name)
+		)
+		card_panel.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
 		$CardsView.add_child(card_panel)
+
+func _on_card_used(_card_name: String):
+	update_cards(-1)
 
 func update_time_elapsed():
 	$Time.text = "TIME " + str(time_elapsed).pad_decimals(2) + "s"
