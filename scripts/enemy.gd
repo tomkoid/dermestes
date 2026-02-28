@@ -5,15 +5,20 @@ const SPEED = 100.0
 const NUM_RAYS = 16
 const RAY_LENGTH = 80.0
 
-@onready var ass = $AnimatedSprite2D
 @onready var player_ref: CharacterBody2D = get_node("../../Beetle")
-
 @export var sp_frames: SpriteFrames
 
 var ray_directions: Array[Vector2] = []
+var ass: AnimatedSprite2D
 
 
 func _ready() -> void:
+	ass = AnimatedSprite2D.new()
+	ass.sprite_frames = sp_frames
+	
+	# append sp frames for this enemy type to the scene
+	add_child(ass)
+	
 	ass.sprite_frames = sp_frames
 	for i in NUM_RAYS:
 		var angle = i * TAU / NUM_RAYS
@@ -21,13 +26,16 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	ass.play("running")
 	if not is_instance_valid(player_ref):
 		return
 
 	var desired_dir = (player_ref.global_position - global_position).normalized()
 	var chosen_dir = _get_avoidance_direction(desired_dir)
-
-	look_at(player_ref.global_position)
+	
+	var target_angle = chosen_dir.angle() + PI/2
+	rotation = lerp_angle(rotation, target_angle, 0.15)
+	
 	velocity = chosen_dir * SPEED
 	move_and_slide()
 
