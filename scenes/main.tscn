@@ -44,6 +44,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Control" type="Control" parent="." unique_id=828867173]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 165.0

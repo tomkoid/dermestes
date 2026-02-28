@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
-
 const SPEED = 100.0
-const NUM_RAYS = 16
-const RAY_LENGTH = 80.0
 
 @onready var player_ref: CharacterBody2D = get_node("../../Beetle")
+
 @export var sp_frames: SpriteFrames
+@export var num_rays = 16
+@export var ray_length = 80.0
 
 var ray_directions: Array[Vector2] = []
 var ass: AnimatedSprite2D
@@ -20,8 +20,8 @@ func _ready() -> void:
 	add_child(ass)
 	
 	ass.sprite_frames = sp_frames
-	for i in NUM_RAYS:
-		var angle = i * TAU / NUM_RAYS
+	for i in num_rays:
+		var angle = i * TAU / num_rays
 		ray_directions.append(Vector2.RIGHT.rotated(angle))
 
 
@@ -56,21 +56,21 @@ func _get_avoidance_direction(desired_dir: Vector2) -> Vector2:
 		interest.append(maxf(0.0, dir.dot(desired_dir)))
 		danger.append(0.0)
 
-	for i in NUM_RAYS:
+	for i in num_rays:
 		var query = PhysicsRayQueryParameters2D.create(
 			global_position,
-			global_position + ray_directions[i] * RAY_LENGTH,
+			global_position + ray_directions[i] * ray_length,
 			0xFFFFFFFF,
 			[get_rid()]
 		)
 		var result = space_state.intersect_ray(query)
 		if result and result.collider != player_ref:
 			var dist = global_position.distance_to(result.position)
-			danger[i] = 1.0 - (dist / RAY_LENGTH)
+			danger[i] = 1.0 - (dist / ray_length)
 
 	var best_dir = desired_dir
 	var best_weight = -INF
-	for i in NUM_RAYS:
+	for i in num_rays:
 		var weight = interest[i] - danger[i]
 		if weight > best_weight:
 			best_weight = weight
