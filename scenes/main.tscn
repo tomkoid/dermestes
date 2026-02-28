@@ -4,8 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://cmsdswgvho46d" path="res://scenes/grid.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://5m4mqxofbxq" path="res://scenes/beetle.tscn" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://cb52f1ihywjh4" path="res://scripts/stats.gd" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://bm5j82yph3e16" path="res://scripts/cards.gd" id="4_tefeu"]
+[ext_resource type="Script" path="res://scripts/cards.gd" id="4_tefeu"]
 [ext_resource type="Texture2D" uid="uid://djx4b1fos71hf" path="res://icon.svg" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://ciki5d063b650" path="res://assets/karyholder.png" id="6_eb6dy"]
 [ext_resource type="FontFile" uid="uid://bncmcyq6rk4jc" path="res://UnifrakturCook-Bold.ttf" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://4b3d2biv1xmu" path="res://assets/ui/button1.png" id="7_85g3d"]
 [ext_resource type="Texture2D" uid="uid://c7snqqgknj7q5" path="res://assets/karty/karta_blue.png" id="7_o6xl0"]
@@ -15,12 +16,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
 size = Vector2(130, 131)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbgi4"]
-bg_color = Color(0.15487596, 0.154876, 0.15487587, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_trceg"]
+texture = ExtResource("6_eb6dy")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eb6dy"]
+bg_color = Color(0.7176471, 0.57254905, 0.50980395, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trceg"]
+bg_color = Color(0.4862745, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o6xl0"]
 
@@ -78,7 +81,7 @@ offset_left = 30.0
 offset_top = 39.0
 offset_right = 353.0
 offset_bottom = 609.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_tbgi4")
+theme_override_styles/panel = SubResource("StyleBoxTexture_trceg")
 
 [node name="Stats" type="VBoxContainer" parent="UI/Panel" unique_id=478628930]
 layout_mode = 1
@@ -91,6 +94,8 @@ script = ExtResource("3_sugp2")
 
 [node name="HP" type="ProgressBar" parent="UI/Panel/Stats" unique_id=1251645187]
 layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_eb6dy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_trceg")
 
 [node name="Time" type="RichTextLabel" parent="UI/Panel/Stats" unique_id=1837015066]
 layout_mode = 2
