@@ -288,8 +288,18 @@ func spawn_random_grave() -> Vector2i:
 	if empty_cells.is_empty():
 		return Vector2i(-1, -1)
 	var cell: Vector2i = empty_cells[randi() % empty_cells.size()]
-	_layer.set_cell(cell, _SOURCE_ID, _TILE_GRAVE)
+	_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
 	_graves[cell] = 1.0
+	if grave_scene:
+		var g := grave_scene.instantiate()
+		g.position = _layer.map_to_local(cell)
+		g.scale = Vector2.ONE * (float(tile_size) / 32.0)
+		_layer.add_child(g)
+		var sprite := g.get_node("AnimatedSprite2D") as AnimatedSprite2D
+		if sprite:
+			sprite.animation = &"states"
+			sprite.frame = 0
+			_grave_sprites[cell] = sprite
 	return cell
 
 
