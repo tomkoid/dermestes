@@ -9,6 +9,10 @@
 script/source = "extends Control
 
 
+func _ready() -> void:
+	$StatsLabel.text = \"Graves eaten: %d\\nTime: %.2fs\" % [GameState.graves_eaten, GameState.time_elapsed]
+
+
 func _on_play_button_pressed() -> void:
 	get_tree().change_scene_to_file(\"res://scenes/main.tscn\")
 
@@ -34,13 +38,13 @@ script = SubResource("GDScript_q1r8t")
 
 [node name="PlayButton" type="Button" parent="." unique_id=1290511391]
 layout_mode = 0
-offset_left = 422.0
-offset_top = 449.0
-offset_right = 719.94995
-offset_bottom = 550.0
+offset_left = 382.0
+offset_top = 448.0
+offset_right = 774.3499
+offset_bottom = 581.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_6up1m")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 68
 theme_override_styles/normal = SubResource("StyleBoxTexture_2m3wi")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_3l7jp")
 theme_override_styles/hover = SubResource("StyleBoxTexture_3l7jp")
@@ -48,13 +52,13 @@ text = "Play again"
 
 [node name="MenuButton" type="Button" parent="." unique_id=116729967]
 layout_mode = 0
-offset_left = 423.0
-offset_top = 256.0
-offset_right = 720.94995
-offset_bottom = 357.0
+offset_left = 48.0
+offset_top = 67.0
+offset_right = 213.19998
+offset_bottom = 123.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_6up1m")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("StyleBoxTexture_2m3wi")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_3l7jp")
 theme_override_styles/hover = SubResource("StyleBoxTexture_3l7jp")
@@ -65,6 +69,28 @@ z_index = -19
 position = Vector2(576, 324)
 scale = Vector2(4.8000007, 4.8000007)
 texture = ExtResource("5_6up1m")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1901648191]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 29.0
+offset_right = 915.0
+offset_bottom = 271.0
+theme_override_fonts/normal_font = ExtResource("2_6up1m")
+theme_override_font_sizes/normal_font_size = 180
+text = "You died"
+
+[node name="StatsLabel" type="Label" parent="." unique_id=100000010]
+layout_mode = 0
+offset_left = 429.0
+offset_top = 295.0
+offset_right = 727.0
+offset_bottom = 368.0
+theme_override_fonts/font = ExtResource("2_6up1m")
+theme_override_font_sizes/font_size = 26
+text = "Graves eaten: 0
+Time: 34.33s"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
