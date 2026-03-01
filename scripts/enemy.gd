@@ -60,6 +60,7 @@ func _physics_process(delta: float) -> void:
 
 	velocity = chosen_dir * SPEED
 	move_and_slide()
+	_clamp_to_grid()
 
 	# Start feeding when close enough to target grave
 	if hunts_graves and _target_cell != Vector2i(-1, -1):
@@ -126,3 +127,9 @@ func _get_avoidance_direction(desired_dir: Vector2) -> Vector2:
 			best_dir = ray_directions[i]
 
 	return best_dir.normalized()
+
+
+func _clamp_to_grid() -> void:
+	var bounds: Rect2 = grid.get_world_bounds()
+	global_position.x = clampf(global_position.x, bounds.position.x, bounds.end.x)
+	global_position.y = clampf(global_position.y, bounds.position.y, bounds.end.y)
