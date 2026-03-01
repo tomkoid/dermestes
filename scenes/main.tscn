@@ -145,7 +145,7 @@ offset_right = 942.0
 offset_bottom = 54.0
 theme_override_fonts/normal_font = ExtResource("6_tipki")
 theme_override_font_sizes/normal_font_size = 25
-text = "Press Space to eat the grave"
+text = "Hold Space to eat the grave"
 horizontal_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=736979228]
