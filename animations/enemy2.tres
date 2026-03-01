@@ -2,6 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://cvr8hb5yeds7i" path="res://assets/ant.png" id="1_0ruqy"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ruqy"]
+atlas = ExtResource("1_0ruqy")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcc5v"]
+atlas = ExtResource("1_0ruqy")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvpqo"]
+atlas = ExtResource("1_0ruqy")
+region = Rect2(288, 0, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jnl7u"]
 atlas = ExtResource("1_0ruqy")
 region = Rect2(48, 0, 48, 48)
@@ -28,6 +40,20 @@ region = Rect2(144, 0, 48, 48)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ruqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcc5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvpqo")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jnl7u")

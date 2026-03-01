@@ -2,6 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://7lgxl80ip8d5" path="res://assets/enemy1.png" id="1_w48et"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_w48et"]
+atlas = ExtResource("1_w48et")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_guow0"]
+atlas = ExtResource("1_w48et")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pd6e"]
+atlas = ExtResource("1_w48et")
+region = Rect2(288, 0, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_md0e3"]
 atlas = ExtResource("1_w48et")
 region = Rect2(48, 0, 48, 48)
@@ -20,6 +32,20 @@ region = Rect2(144, 0, 48, 48)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w48et")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_guow0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pd6e")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_md0e3")

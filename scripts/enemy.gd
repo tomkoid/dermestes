@@ -72,8 +72,14 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(i)
 		if collision.get_collider().name == "Beetle":
 			player_ref.change_health.emit(-10)
-			queue_free()
+			_die()
 			return
+
+
+func _die() -> void:
+	set_physics_process(false)
+	ass.play(&"death")
+	ass.animation_finished.connect(queue_free, CONNECT_ONE_SHOT)
 
 
 ## Returns the world position this enemy should move toward.
