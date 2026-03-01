@@ -103,8 +103,6 @@ func update_time_elapsed():
 
 func update_died():
 	stopwatch_stopped = true
-	GameState.graves_eaten = graves_eaten
-	GameState.time_elapsed = time_elapsed
 	
 func create_toast(content: String):
 	var label = RichTextLabel.new()

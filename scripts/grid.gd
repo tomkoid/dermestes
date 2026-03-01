@@ -116,26 +116,36 @@ func _make_atlas() -> ImageTexture:
 
 func _fill_grid() -> void:
 	var rng := RandomNumberGenerator.new()
-	rng.seed = random_seed
+	if random_seed == 0:
+		rng.randomize()
+	else:
+		rng.seed = random_seed
 
+	# Fill all cells as empty first
 	for x in range(grid_width):
 		for y in range(grid_height):
-			var cell := Vector2i(x, y)
-			if rng.randf() < grave_probability:
-				_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
-				_graves[cell] = 1.0
-				if grave_scene:
-					var g := grave_scene.instantiate()
-					g.position = _layer.map_to_local(cell)
-					g.scale = Vector2.ONE * (float(tile_size) / 32.0)
-					_layer.add_child(g)
-					var sprite := g.get_node("AnimatedSprite2D") as AnimatedSprite2D
-					if sprite:
-						sprite.animation = &"states"
-						sprite.frame = 0
-						_grave_sprites[cell] = sprite
-			else:
-				_layer.set_cell(cell, _SOURCE_ID, _TILE_EMPTY)
+			_layer.set_cell(Vector2i(x, y), _SOURCE_ID, _TILE_EMPTY)
+
+	# Pick exactly 2 random cells for graves
+	var all_cells: Array[Vector2i] = []
+	for x in range(grid_width):
+		for y in range(grid_height):
+			all_cells.append(Vector2i(x, y))
+	all_cells.shuffle()
+
+	for i in 2:
+		var cell := all_cells[i]
+		_graves[cell] = 1.0
+		if grave_scene:
+			var g := grave_scene.instantiate()
+			g.position = _layer.map_to_local(cell)
+			g.scale = Vector2.ONE * (float(tile_size) / 32.0)
+			_layer.add_child(g)
+			var sprite := g.get_node("AnimatedSprite2D") as AnimatedSprite2D
+			if sprite:
+				sprite.animation = &"states"
+				sprite.frame = 0
+				_grave_sprites[cell] = sprite
 
 
 # ---------------------------------------------------------------------------
