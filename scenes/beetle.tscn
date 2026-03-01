@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://s2un44nogqjj" path="res://assets/broucek_attack.png" id="2_miimq"]
 [ext_resource type="AudioStream" uid="uid://bkq8sdgqv0os6" path="res://assets/sounds/die.mp3" id="3_c3xpc"]
 [ext_resource type="AudioStream" uid="uid://bqh5imjhibsey" path="res://assets/sounds/eating.mp3" id="3_w5j00"]
-[ext_resource type="AudioStream" path="res://assets/sounds/bodyhit.mp3" id="4_bhit"]
+[ext_resource type="AudioStream" uid="uid://bva1edkmoubuk" path="res://assets/sounds/bodyhit.mp3" id="4_bhit"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s7k2w"]
 atlas = ExtResource("2_miimq")
@@ -302,6 +302,7 @@ stream = ExtResource("3_w5j00")
 
 [node name="EatingPlayer" type="AudioStreamPlayer" parent="." unique_id=106919579]
 stream = ExtResource("3_w5j00")
+volume_db = -10.0
 
-[node name="HitPlayer" type="AudioStreamPlayer" parent="."]
+[node name="HitPlayer" type="AudioStreamPlayer" parent="." unique_id=1546728789]
 stream = ExtResource("4_bhit")
