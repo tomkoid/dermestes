@@ -17,6 +17,8 @@ extends CharacterBody2D
 var health: float
 var shielded: int
 
+var _shield_material: ShaderMaterial
+
 var _grid: Grid = null
 var _is_feeding: bool = false
 var _is_in_attack: bool = false
@@ -44,6 +46,9 @@ func _ready() -> void:
 	change_health.connect(_handle_change_health)
 	change_shielded.connect(_handle_change_shielded)
 	attack.connect(_handle_attack)
+	
+	_shield_material = ShaderMaterial.new()
+	_shield_material.shader = preload("res://shaders/outline.gdshader")
 	
 	health = max_health
 	_grid = get_node(grid_path)
@@ -151,6 +156,7 @@ func _handle_grave_consumed(_cell: Vector2i, _consumer: String):
 	
 func _handle_change_shielded(yes: bool):
 	shielded = yes
+	_ass.material = _shield_material if yes else null
 
 func _handle_attack():
 	_is_in_attack = true
