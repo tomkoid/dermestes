@@ -119,7 +119,7 @@ func create_toast(content: String):
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.size = Vector2(600,400)
 	label.modulate.a = 0.0
-	
+		
 	label.scroll_active = false
 		
 	var tween = get_tree().create_tween()
