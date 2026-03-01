@@ -10,6 +10,7 @@ func _ready() -> void:
 	_grid.grave_consumed.connect(_on_body_consumed)
 
 	player_ref.died.connect(_on_player_died)
+	player_ref.hit.connect(_screen_shake)
 	#var enemy_spawn_timer = get_tree().create_timer(2, true, false, true)
 	var enemy_spawn_timer = Timer.new()
 	enemy_spawn_timer.name = "EnemySpawnTimer"
@@ -54,6 +55,8 @@ func _on_menu_button_pressed() -> void:
 const HORNET_RANGE = 200.0
 const DR_HOUSE_HEAL = 30.0
 const JINDRA_SHIELD_DURATION = 5.0
+const SHAKE_INTENSITY = 8.0
+const SHAKE_DURATION = 0.3
 
 func _on_card_used(card_name: String) -> void:
 	if card_name == "Hornet" or card_name == "Legolas" or card_name == "Kratos":
@@ -67,3 +70,11 @@ func _on_card_used(card_name: String) -> void:
 	elif card_name == "Jindřich ze Skalice" or card_name == "Cpt. America" or card_name == "Gandalf":
 		player_ref.change_shielded.emit(true)
 		get_tree().create_timer(JINDRA_SHIELD_DURATION).timeout.connect(func(): player_ref.change_shielded.emit(false))
+
+
+func _screen_shake() -> void:
+	var tween = create_tween()
+	for i in 6:
+		var offset = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * SHAKE_INTENSITY
+		tween.tween_property(self, "position", offset, SHAKE_DURATION / 6.0)
+	tween.tween_property(self, "position", Vector2.ZERO, SHAKE_DURATION / 6.0)

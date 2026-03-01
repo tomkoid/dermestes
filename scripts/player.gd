@@ -39,6 +39,7 @@ signal died
 signal body_consumed(cell: Vector2i)
 signal change_shielded(yes: bool)
 signal attack
+signal hit
 
 const ATTACK_DURATION = 1.5625
 
@@ -149,6 +150,8 @@ func _nearest_grave_in_range() -> Vector2i:
 func _handle_change_health(value: float):
 	if value < 0 and shielded:
 		return
+	if value < 0:
+		hit.emit()
 	health = health + value
 	
 func _handle_grave_consumed(_cell: Vector2i, _consumer: String):

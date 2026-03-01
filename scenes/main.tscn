@@ -154,8 +154,8 @@ offset_bottom = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=565351225]
 z_index = -124
-position = Vector2(576.4445, 323.75)
-scale = Vector2(4.803704, 4.803704)
+position = Vector2(622, 325)
+scale = Vector2(6.466666, 7.125926)
 texture = ExtResource("10_choun")
 
 [connection signal="grave_consumed" from="Grid" to="UI/Panel/Stats" method="_on_grid_grave_consumed"]
