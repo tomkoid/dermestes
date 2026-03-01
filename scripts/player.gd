@@ -15,9 +15,11 @@ extends CharacterBody2D
 @export var feed_range: float = 130.0
 
 var health: float
+var shielded: int
 
 var _grid: Grid = null
 var _is_feeding: bool = false
+var _is_in_attack: bool = false
 var _nearby_grave: Vector2i = Vector2i(-1, -1)
 
 @onready var _body_visual: Polygon2D = $Body
@@ -33,10 +35,15 @@ signal health_changed(value: float, maximum: float)
 signal change_health(value: float)
 signal died
 signal body_consumed(cell: Vector2i)
+signal change_shielded(yes: bool)
+signal attack
 
+const ATTACK_DURATION = 1.5625
 
 func _ready() -> void:
 	change_health.connect(_handle_change_health)
+	change_shielded.connect(_handle_change_shielded)
+	attack.connect(_handle_attack)
 	
 	health = max_health
 	_grid = get_node(grid_path)
@@ -57,7 +64,10 @@ func _physics_process(delta: float) -> void:
 		Input.get_axis("ui_up", "ui_down")
 	)
 	if dir != Vector2.ZERO:
-		_ass.play("running")
+		if !_is_in_attack:
+			_ass.play("running")
+		else:
+			_ass.play("attack")
 		var target_angle = dir.angle() + PI/2
 		rotation = lerp_angle(rotation, target_angle, 0.15)
 		
@@ -66,7 +76,10 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity = Vector2.ZERO
 	else:
-		_ass.play("idle")
+		if !_is_in_attack:
+			_ass.play("idle")
+		else:
+			_ass.play("attack")
 		velocity = Vector2.ZERO
 
 	move_and_slide()
@@ -128,8 +141,6 @@ func _nearest_grave_in_range() -> Vector2i:
 					return c
 	return Vector2i(-1, -1)
 
-var shielded: bool = false
-
 func _handle_change_health(value: float):
 	if value < 0 and shielded:
 		return
@@ -137,6 +148,13 @@ func _handle_change_health(value: float):
 	
 func _handle_grave_consumed(_cell: Vector2i, _consumer: String):
 	$EatenGrave.play()
+	
+func _handle_change_shielded(yes: bool):
+	shielded = yes
+
+func _handle_attack():
+	_is_in_attack = true
+	_ass.animation_finished.connect(func(): _is_in_attack = false)
 
 #func _update_visuals() -> void:
 	## Body color: green (healthy) → red (starving)

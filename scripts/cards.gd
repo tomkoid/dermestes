@@ -26,6 +26,8 @@ signal card_used(card_name: String)
 func _ready() -> void:
 	grid_ref.grave_consumed.connect(_handle_grave_consumed)
 	card_add.connect(_handle_card_add)
+	
+	_handle_card_add(0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
