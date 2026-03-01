@@ -118,13 +118,13 @@ visible = false
 texture = ExtResource("7_o6xl0")
 
 [node name="MenuButton" type="Button" parent="UI" unique_id=1238204633]
-offset_left = 954.4
+offset_left = 1038.9
 offset_top = 8.0
 offset_right = 1146.15
-offset_bottom = 67.0
+offset_bottom = 41.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_tipki")
-theme_override_font_sizes/font_size = 33
+theme_override_font_sizes/font_size = 21
 theme_override_styles/normal = SubResource("StyleBoxTexture_ya4ey")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_eb6dy")
 theme_override_styles/hover = SubResource("StyleBoxTexture_eb6dy")
