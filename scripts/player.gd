@@ -39,6 +39,8 @@ func _ready() -> void:
 	
 	health = max_health
 	_grid = get_node(grid_path)
+	
+	_grid.grave_consumed.connect(_handle_grave_consumed)
 
 
 func _process(delta: float) -> void:
@@ -96,6 +98,7 @@ func _tick_health(delta: float) -> void:
 	health = clampf(health - health_drain_rate * delta, 0.0, max_health)
 	health_changed.emit(health, max_health)
 	if health <= 0.0:
+		$DiePlayer.play()
 		set_process(false)
 		set_physics_process(false)
 		died.emit()
@@ -129,6 +132,9 @@ func _handle_change_health(value: float):
 	if value < 0 and shielded:
 		return
 	health = health + value
+	
+func _handle_grave_consumed(_cell: Vector2i, _consumer: String):
+	$EatenGrave.play()
 
 #func _update_visuals() -> void:
 	## Body color: green (healthy) → red (starving)

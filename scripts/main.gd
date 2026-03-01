@@ -42,6 +42,7 @@ func _spawn_enemy():
 	$Enemies.add_child(e)
 
 func _on_player_died():
+	await player_ref.get_node("DiePlayer").finished
 	get_tree().change_scene_to_file("res://scenes/death.tscn")
 
 
