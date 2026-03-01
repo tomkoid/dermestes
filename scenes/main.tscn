@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://4b3d2biv1xmu" path="res://assets/ui/button1.png" id="7_85g3d"]
 [ext_resource type="Texture2D" uid="uid://c7snqqgknj7q5" path="res://assets/karty/karta_blue.png" id="7_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://b1i2kc6qoy0ae" path="res://assets/ui/button2.png" id="8_choun"]
-[ext_resource type="Texture2D" uid="uid://xliobrihggkl" path="res://assets/BAK.png" id="10_choun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
 size = Vector2(130, 131)
@@ -137,11 +136,16 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_eb6dy")
 theme_override_styles/hover = SubResource("StyleBoxTexture_eb6dy")
 text = "Go to menu"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1758675335]
+[node name="EatPrompt" type="RichTextLabel" parent="UI" unique_id=1095076812]
 z_index = -56
-position = Vector2(576.00006, 324.00003)
-scale = Vector2(4.8, 4.8)
-texture = ExtResource("10_choun")
+offset_left = 553.0
+offset_top = 20.0
+offset_right = 942.0
+offset_bottom = 54.0
+theme_override_fonts/normal_font = ExtResource("6_tipki")
+theme_override_font_sizes/normal_font_size = 25
+text = "Press Space to eat the grave"
+horizontal_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=736979228]
 offset_right = 40.0

@@ -27,6 +27,7 @@ var _nearby_grave: Vector2i = Vector2i(-1, -1)
 @onready var _collision: CollisionShape2D = $CollisionShape2D
 
 @onready var _cards_state = $"../CardsState"
+@onready var _eat_prompt: RichTextLabel = $"../UI/EatPrompt"
 
 signal health_changed(value: float, maximum: float)
 signal change_health(value: float)
@@ -45,9 +46,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_nearby_grave = _nearest_grave_in_range()
+	_eat_prompt.visible = _nearby_grave != Vector2i(-1, -1) and not _is_feeding
 	_tick_feeding(delta)
 	_tick_health(delta)
-	#_update_visuals()
 
 
 func _physics_process(delta: float) -> void:
