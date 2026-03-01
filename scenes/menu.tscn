@@ -6,6 +6,18 @@
 [ext_resource type="FontFile" uid="uid://bncmcyq6rk4jc" path="res://UnifrakturCook-Bold.ttf" id="2_mhnvy"]
 [ext_resource type="Texture2D" uid="uid://b1i2kc6qoy0ae" path="res://assets/ui/button2.png" id="3_mhnvy"]
 [ext_resource type="AudioStream" uid="uid://wmyo4ckdq4jm" path="res://assets/music/menushit.mp3" id="6_g3eks"]
+[ext_resource type="Script" path="res://scripts/settings.gd" id="7_sttgs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_popup"]
+bg_color = Color(0.12, 0.1, 0.08, 0.95)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vjb58"]
 atlas = ExtResource("1_yqeox")
@@ -97,6 +109,7 @@ text = "Play"
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1086415837]
 stream = ExtResource("6_g3eks")
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1238925526]
@@ -108,6 +121,97 @@ offset_bottom = 153.0
 theme_override_fonts/normal_font = ExtResource("2_mhnvy")
 theme_override_font_sizes/normal_font_size = 114
 text = "Dermestes"
+
+[node name="SettingsPopup" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -160.0
+offset_right = 180.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_popup")
+script = ExtResource("7_sttgs")
+
+[node name="VBox" type="VBoxContainer" parent="SettingsPopup"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="SettingsPopup/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mhnvy")
+theme_override_font_sizes/font_size = 36
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="MasterRow" type="HBoxContainer" parent="SettingsPopup/VBox"]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="SettingsPopup/VBox/MasterRow"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mhnvy")
+theme_override_font_sizes/font_size = 20
+text = "Master"
+
+[node name="MasterSlider" type="HSlider" parent="SettingsPopup/VBox/MasterRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXRow" type="HBoxContainer" parent="SettingsPopup/VBox"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="SettingsPopup/VBox/SFXRow"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mhnvy")
+theme_override_font_sizes/font_size = 20
+text = "SFX"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsPopup/VBox/SFXRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="MusicRow" type="HBoxContainer" parent="SettingsPopup/VBox"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="SettingsPopup/VBox/MusicRow"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mhnvy")
+theme_override_font_sizes/font_size = 20
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPopup/VBox/MusicRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="CloseButton" type="Button" parent="SettingsPopup/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mhnvy")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxTexture_4ytvr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_g3eks")
+theme_override_styles/hover = SubResource("StyleBoxTexture_g3eks")
+text = "Close"
 
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

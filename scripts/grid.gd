@@ -290,6 +290,11 @@ func _remove_grave_sprite(cell: Vector2i) -> void:
 		sprite.animation_finished.connect(sprite.get_parent().queue_free, CONNECT_ONE_SHOT)
 
 
+## Returns the body content (0.0–1.0) for a grave cell, or 0.0 if none.
+func get_body_content(cell: Vector2i) -> float:
+	return _graves.get(cell, 0.0)
+
+
 ## World-space Rect2 covering the entire grid (top-left origin, pixel size).
 func get_world_bounds() -> Rect2:
 	if not is_instance_valid(_layer):

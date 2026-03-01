@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://5m4mqxofbxq" path="res://scenes/beetle.tscn" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://cb52f1ihywjh4" path="res://scripts/stats.gd" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://bm5j82yph3e16" path="res://scripts/cards.gd" id="4_tefeu"]
+[ext_resource type="AudioStream" uid="uid://cslg2t4a2wmd4" path="res://assets/music/funeralmarch.mp3" id="5_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://djx4b1fos71hf" path="res://icon.svg" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://ciki5d063b650" path="res://assets/karyholder.png" id="6_eb6dy"]
 [ext_resource type="FontFile" uid="uid://bncmcyq6rk4jc" path="res://UnifrakturCook-Bold.ttf" id="6_tipki"]
@@ -12,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c7snqqgknj7q5" path="res://assets/karty/karta_blue.png" id="7_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://b1i2kc6qoy0ae" path="res://assets/ui/button2.png" id="8_choun"]
 [ext_resource type="Texture2D" uid="uid://xliobrihggkl" path="res://assets/BAK.png" id="10_choun"]
-[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="13_pause"]
+[ext_resource type="Script" uid="uid://dgfavraa2njbu" path="res://scripts/pause_menu.gd" id="13_pause"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
 size = Vector2(130, 131)
@@ -56,6 +57,10 @@ offset_bottom = 40.0
 
 [node name="CardsState" type="Node2D" parent="." unique_id=1084353535]
 script = ExtResource("4_tefeu")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=2121068690]
+stream = ExtResource("5_a8y0u")
+autoplay = true
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=1997846331]
 
@@ -149,9 +154,9 @@ theme_override_font_sizes/normal_font_size = 25
 text = "Hold Space to eat the grave"
 horizontal_alignment = 1
 
-[node name="PauseOverlay" type="ColorRect" parent="UI"]
-visible = false
+[node name="PauseOverlay" type="ColorRect" parent="UI" unique_id=1192970076]
 process_mode = 3
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -160,7 +165,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.6)
 script = ExtResource("13_pause")
 
-[node name="VBox" type="VBoxContainer" parent="UI/PauseOverlay"]
+[node name="VBox" type="VBoxContainer" parent="UI/PauseOverlay" unique_id=1580197391]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -176,14 +181,14 @@ grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Title" type="Label" parent="UI/PauseOverlay/VBox"]
+[node name="Title" type="Label" parent="UI/PauseOverlay/VBox" unique_id=1584896013]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_tipki")
 theme_override_font_sizes/font_size = 40
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="UI/PauseOverlay/VBox"]
+[node name="ResumeButton" type="Button" parent="UI/PauseOverlay/VBox" unique_id=992380823]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_tipki")
 theme_override_font_sizes/font_size = 24
@@ -192,7 +197,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_eb6dy")
 theme_override_styles/hover = SubResource("StyleBoxTexture_eb6dy")
 text = "Resume"
 
-[node name="MenuButton2" type="Button" parent="UI/PauseOverlay/VBox"]
+[node name="MenuButton2" type="Button" parent="UI/PauseOverlay/VBox" unique_id=1570448531]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_tipki")
 theme_override_font_sizes/font_size = 24

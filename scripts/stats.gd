@@ -97,7 +97,7 @@ func update_cards(_index: int):
 		$CardsView.add_child(card_panel)
 
 func _on_card_used(card_name: String):
-	create_toast("You used the [b][color=green]%s[/color][/b] card!" % card_name)
+	create_toast("[font_size=36]You used the [b][color=yellow]%s[/color][/b] card![/font_size]" % card_name)
 	update_cards(-1)
 
 func update_time_elapsed():
@@ -115,10 +115,9 @@ func create_toast(content: String):
 	label.text = content
 	label.fit_content = true
 	label.bbcode_enabled = true
-	label.position = Vector2(200, 500)
+	label.position = Vector2(300, 500)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.size = Vector2(400,400)
-	label.scale = Vector2(2.0,2.0)
+	label.size = Vector2(600,400)
 	label.modulate.a = 0.0
 	
 	label.scroll_active = false

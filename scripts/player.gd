@@ -18,6 +18,7 @@ var health: float
 var shielded: int
 
 var _shield_material: ShaderMaterial
+var _grave_bar: ProgressBar
 
 var _grid: Grid = null
 var _is_feeding: bool = false
@@ -56,12 +57,35 @@ func _ready() -> void:
 	
 	_grid.grave_consumed.connect(_handle_grave_consumed)
 
+	_grave_bar = ProgressBar.new()
+	_grave_bar.custom_minimum_size = Vector2(60, 8)
+	_grave_bar.size = Vector2(60, 8)
+	_grave_bar.max_value = 1.0
+	_grave_bar.show_percentage = false
+	_grave_bar.visible = false
+	var bg := StyleBoxFlat.new()
+	bg.bg_color = Color(0.2, 0.2, 0.2, 0.8)
+	bg.corner_radius_top_left = 2
+	bg.corner_radius_top_right = 2
+	bg.corner_radius_bottom_left = 2
+	bg.corner_radius_bottom_right = 2
+	var fill := StyleBoxFlat.new()
+	fill.bg_color = Color(0.85, 0.55, 0.1)
+	fill.corner_radius_top_left = 2
+	fill.corner_radius_top_right = 2
+	fill.corner_radius_bottom_left = 2
+	fill.corner_radius_bottom_right = 2
+	_grave_bar.add_theme_stylebox_override("background", bg)
+	_grave_bar.add_theme_stylebox_override("fill", fill)
+	get_parent().add_child.call_deferred(_grave_bar)
+
 
 func _process(delta: float) -> void:
 	_nearby_grave = _nearest_grave_in_range()
 	_eat_prompt.visible = _nearby_grave != Vector2i(-1, -1) and not _is_feeding
 	_tick_feeding(delta)
 	_tick_health(delta)
+	_update_grave_bar()
 
 
 func _physics_process(delta: float) -> void:
@@ -134,6 +158,22 @@ func _clamp_to_grid() -> void:
 	var half := (_collision.shape as RectangleShape2D).size / 2.0 * scale
 	global_position.x = clampf(global_position.x, bounds.position.x + half.x, bounds.end.x - half.x)
 	global_position.y = clampf(global_position.y, bounds.position.y + half.y, bounds.end.y - half.y)
+
+
+func _update_grave_bar() -> void:
+	if not is_instance_valid(_grave_bar):
+		return
+	if _nearby_grave == Vector2i(-1, -1):
+		_grave_bar.visible = false
+		return
+	var content := _grid.get_body_content(_nearby_grave)
+	if content <= 0.0:
+		_grave_bar.visible = false
+		return
+	_grave_bar.value = content
+	_grave_bar.visible = true
+	var grave_center := _grid.cell_center(_nearby_grave)
+	_grave_bar.global_position = grave_center - Vector2(_grave_bar.size.x * 0.5, _grid.tile_size * 0.5 + 14)
 
 
 ## Returns the nearest grave cell within feed_range, or Vector2i(-1,-1) if none.
