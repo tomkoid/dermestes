@@ -57,17 +57,22 @@ const DR_HOUSE_HEAL = 30.0
 const JINDRA_SHIELD_DURATION = 5.0
 const SHAKE_INTENSITY = 8.0
 const SHAKE_DURATION = 0.3
+const HORNET_WAVE_SPEED = 400.0
 
 func _on_card_used(card_name: String) -> void:
 	if card_name == "Hornet" or card_name == "Legolas" or card_name == "Kratos":
 		player_ref.attack.emit()
 		var player_pos = player_ref.global_position
 		for enemy_node in $Enemies.get_children():
-			if enemy_node is CharacterBody2D and player_pos.distance_to(enemy_node.global_position) <= HORNET_RANGE:
-				enemy_node.queue_free()
-	elif card_name == "Dr. House" or card_name == "Nathan Drake" or card_name == "Dash":
+			if enemy_node is CharacterBody2D:
+				var dist = player_pos.distance_to(enemy_node.global_position)
+				if dist <= HORNET_RANGE:
+					var delay = dist / HORNET_WAVE_SPEED
+					get_tree().create_timer(delay).timeout.connect(enemy_node._die)
+					enemy_node.set_physics_process(false)
+	elif card_name == "Dr. House" or card_name == "Nathan Drake" or card_name == "Flash":
 		player_ref.change_health.emit(DR_HOUSE_HEAL)
-	elif card_name == "Jindřich ze Skalice" or card_name == "Cpt. America" or card_name == "Gandalf":
+	elif card_name == "Henry of Skalitz" or card_name == "Cpt. America" or card_name == "Gandalf":
 		player_ref.change_shielded.emit(true)
 		get_tree().create_timer(JINDRA_SHIELD_DURATION).timeout.connect(func(): player_ref.change_shielded.emit(false))
 
