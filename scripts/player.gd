@@ -76,6 +76,7 @@ func _physics_process(delta: float) -> void:
 
 func _tick_feeding(delta: float) -> void:
 	_is_feeding = false
+	#$EatingPlayer.stop()
 	if not Input.is_action_pressed("ui_accept"):
 		return
 	if _nearby_grave == Vector2i(-1, -1):
@@ -83,6 +84,9 @@ func _tick_feeding(delta: float) -> void:
 	var drained := _grid.eat_body(_nearby_grave, body_drain_rate * delta, name)
 	if drained > 0.0:
 		_is_feeding = true
+		if not $EatingPlayer.playing:
+			$EatingPlayer.pitch_scale = randf_range(0.8, 1.2)
+			$EatingPlayer.play()
 		health = minf(health + heal_rate * delta, max_health)
 		if not _grid.has_body(_nearby_grave):
 			body_consumed.emit(_nearby_grave, "Beetle")

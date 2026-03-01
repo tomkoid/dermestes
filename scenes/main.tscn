@@ -56,6 +56,8 @@ offset_bottom = 40.0
 [node name="CardsState" type="Node2D" parent="." unique_id=1084353535]
 script = ExtResource("4_tefeu")
 
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=1997846331]
+
 [node name="TestObstacle" type="Control" parent="." unique_id=828867173]
 visible = false
 layout_mode = 3
