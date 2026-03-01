@@ -152,6 +152,7 @@ func _handle_change_health(value: float):
 		return
 	if value < 0:
 		hit.emit()
+		$HitPlayer.play()
 	health = health + value
 	
 func _handle_grave_consumed(_cell: Vector2i, _consumer: String):
