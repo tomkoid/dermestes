@@ -6,6 +6,8 @@ extends VBoxContainer
 var time_elapsed = 0.0
 var stopwatch_stopped = false
 
+var graves_eaten = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	stopwatch_stopped = false
@@ -18,6 +20,7 @@ func _process(delta: float) -> void:
 	if !stopwatch_stopped:
 		time_elapsed += delta
 		update_time_elapsed()
+	
 
 func update_hp(value: float, maximum: int):
 	$HP.value = ceil(value)
@@ -94,7 +97,9 @@ func _on_card_used(card_name: String):
 	update_cards(-1)
 
 func update_time_elapsed():
-	$Time.text = "TIME " + str(time_elapsed).pad_decimals(2) + "s"
+	$Time.text = "Time " + str(time_elapsed).pad_decimals(2) + "s"
+
+
 
 func update_died():
 	stopwatch_stopped = true
@@ -131,3 +136,9 @@ func create_toast(content: String):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 	#pass
+
+
+func _on_grid_grave_consumed(cell: Vector2i, consumer_name: String) -> void:
+	if consumer_name == "Beetle":
+		graves_eaten += 1
+		$Graves.text = "Graves: " + str(graves_eaten)

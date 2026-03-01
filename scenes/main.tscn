@@ -100,7 +100,13 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_trceg")
 
 [node name="Time" type="RichTextLabel" parent="UI/Panel/Stats" unique_id=1837015066]
 layout_mode = 2
-text = "TIME 120s"
+text = "Time 120s"
+fit_content = true
+horizontal_alignment = 3
+
+[node name="Graves" type="RichTextLabel" parent="UI/Panel/Stats" unique_id=849922661]
+layout_mode = 2
+text = "Graves 0"
 fit_content = true
 horizontal_alignment = 3
 
@@ -140,4 +146,5 @@ texture = ExtResource("10_choun")
 offset_right = 40.0
 offset_bottom = 40.0
 
+[connection signal="grave_consumed" from="Grid" to="UI/Panel/Stats" method="_on_grid_grave_consumed"]
 [connection signal="pressed" from="UI/MenuButton" to="." method="_on_menu_button_pressed"]
