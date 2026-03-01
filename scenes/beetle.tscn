@@ -2,8 +2,21 @@
 
 [ext_resource type="Script" uid="uid://b50310d82uhi3" path="res://scripts/player.gd" id="1_g2qrh"]
 [ext_resource type="Texture2D" uid="uid://o4v5mhi3eqxv" path="res://assets/broucek.png" id="1_txtg1"]
+[ext_resource type="Texture2D" uid="uid://cu8dd5yeb7k5c" path="res://assets/broucek_smrt.png" id="2_7vuf7"]
 [ext_resource type="AudioStream" uid="uid://bkq8sdgqv0os6" path="res://assets/sounds/die.mp3" id="3_c3xpc"]
 [ext_resource type="AudioStream" uid="uid://bqh5imjhibsey" path="res://assets/sounds/eating.mp3" id="3_w5j00"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88ub3"]
+atlas = ExtResource("2_7vuf7")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miimq"]
+atlas = ExtResource("2_7vuf7")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwiof"]
+atlas = ExtResource("2_7vuf7")
+region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2qrh"]
 atlas = ExtResource("1_txtg1")
@@ -31,6 +44,20 @@ region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c3xpc"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88ub3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miimq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwiof")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g2qrh")
@@ -68,7 +95,7 @@ script = ExtResource("1_g2qrh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1197009024]
 sprite_frames = SubResource("SpriteFrames_c3xpc")
-animation = &"running"
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=258845540]
 position = Vector2(0, 0.5)

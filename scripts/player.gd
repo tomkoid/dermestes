@@ -101,6 +101,7 @@ func _tick_health(delta: float) -> void:
 		$DiePlayer.play()
 		set_process(false)
 		set_physics_process(false)
+		_ass.play("death")
 		died.emit()
 
 
