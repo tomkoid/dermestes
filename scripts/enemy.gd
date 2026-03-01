@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 
 	# Start feeding when close enough to target grave
 	if hunts_graves and _target_cell != Vector2i(-1, -1):
-		if global_position.distance_to(grid.cell_center(_target_cell)) < 130.0:
+		if global_position.distance_to(grid.cell_center(_target_cell)) < 70.0:
 			_feeding_timer = FEED_DURATION
 			return
 
