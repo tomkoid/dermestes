@@ -35,9 +35,10 @@ func update_cards(_index: int):
 	for card in cards_state_ref.cards_applied:
 		var card_panel = PanelContainer.new()
 		card_panel.custom_minimum_size = Vector2(120, 0)
+		card_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 
 		var style = StyleBoxFlat.new()
-		style.bg_color = Color(0.2, 0.2, 0.22, 0.9)
+		style.bg_color = Color(0.2, 0.2, 0.22, 0)
 		style.corner_radius_top_left = 6
 		style.corner_radius_top_right = 6
 		style.corner_radius_bottom_left = 6
@@ -47,6 +48,9 @@ func update_cards(_index: int):
 		style.content_margin_top = 8
 		style.content_margin_bottom = 8
 		card_panel.add_theme_stylebox_override("panel", style)
+
+		card_panel.mouse_entered.connect(func(): style.bg_color = Color(0.35, 0.35, 0.38, 0.9))
+		card_panel.mouse_exited.connect(func(): style.bg_color = Color(0.2, 0.2, 0.22, 0))
 
 		var vbox = VBoxContainer.new()
 		vbox.alignment = BoxContainer.ALIGNMENT_BEGIN
@@ -103,6 +107,8 @@ func update_time_elapsed():
 
 func update_died():
 	stopwatch_stopped = true
+	GameState.graves_eaten = graves_eaten
+	GameState.time_elapsed = time_elapsed
 	
 func create_toast(content: String):
 	var label = RichTextLabel.new()
