@@ -7,6 +7,8 @@ class_name Grid
 ## Cells are either plain dirt or graves containing a decomposing body.
 ## The grid is purely spatial — the player (wormbeetle) moves freely in world space
 ## and queries the grid via world_to_cell() / has_body() / consume_body().
+@export var initial_graves: int = 2
+
 
 @export var grid_width: int = 9:
 	set(v):
@@ -23,13 +25,6 @@ class_name Grid
 @export var tile_size: int = 32:
 	set(v):
 		tile_size = v
-		if is_inside_tree():
-			_build()
-
-## Fraction of cells that start as graves (0 – 1).
-@export_range(0.0, 1.0) var grave_probability: float = 0.25:
-	set(v):
-		grave_probability = v
 		if is_inside_tree():
 			_build()
 
@@ -133,7 +128,8 @@ func _fill_grid() -> void:
 			all_cells.append(Vector2i(x, y))
 	all_cells.shuffle()
 
-	for i in 2:
+
+	for i in initial_graves:
 		var cell := all_cells[i]
 		_graves[cell] = 1.0
 		if grave_scene:

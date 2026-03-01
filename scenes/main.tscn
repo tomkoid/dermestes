@@ -41,7 +41,6 @@ position = Vector2(750, 325)
 grid_width = 5
 grid_height = 5
 tile_size = 128
-grave_probability = 0.1
 
 [node name="Beetle" parent="." unique_id=299549955 instance=ExtResource("3_jyhfs")]
 position = Vector2(681.99994, 203.99998)
