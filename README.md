@@ -1,3 +1,5 @@
+**NOTE:** This project has been migrated over to Codeberg: https://codeberg.org/dystopia/dermestes
+
 # Dermestes
 
 Dermestes is a top-down action arcade game built in Godot 4.6. You play as a
